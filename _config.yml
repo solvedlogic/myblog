@@ -1,0 +1,91 @@
+# Site
+name: "Azure with AJ"
+title: "Azure with AJ"
+description: "A blog by an Azure, DevOps and AI enthusiast, sharing valuable insights and expertise."
+logo: "assets/images/about/profile.png"
+favicon: "assets/images/favicons/favicon.ico"
+url: "https://azurewithaj.com"
+canonical_url: "https://azurewithaj.com"
+baseurl: ""
+google_analytics: "G-QN1JHQ7WLQ"
+
+# Giscus comments (https://giscus.app)
+# Fill these values from the giscus.app setup page.
+giscus:
+  repo: "tw3lveparsecs/tw3lveparsecs.github.io" # e.g. "tw3lveparsecs/tw3lveparsecs.github.io"
+  repo_id: ""
+  category: "Announcements"
+  category_id: ""
+  mapping: "title" # pathname | url | title | og:title | specific
+  strict: 1
+  reactions_enabled: 1
+  emit_metadata: 0
+  input_position: "bottom" # bottom | top
+  theme: "preferred_color_scheme"
+  lang: "en"
+  loading: "lazy"
+include: ["_pages"]
+permalink: /:title/
+
+# Social links (used in header)
+social:
+  github: "https://github.com/tw3lveparsecs"
+  linkedin: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
+  email: "aj.bajada@outlook.com"
+
+# Authors
+authors:
+  AJ Bajada:
+    name: AJ Bajada
+    display_name: AJ Bajada
+    avatar: "assets/images/about/profile.png"
+    follow_url: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
+    # follow_label: "Follow"
+    description: "Author of 'Azure with AJ', sharing insights on Azure, DevOps, and AI."
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: "/category/:name/"
+
+# Pagination
+paginate: 6
+paginate_path: /page:num/
+
+# Other
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
+adsense: "disabled"
+adsense-data-ad-client: "ca-pub-3412143450191416"
+adsense-data-ad-slot: "1363087678"
+
+# Lazy Images ("enabled" or "disabled")
+lazyimages: "disabled"
+
+# Mermaid diagrams
+# Enable per-page with front matter: `mermaid: true`
+# Or enable globally here.
+mermaid:
+  enabled: false
+  version: "10"
+
+exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
