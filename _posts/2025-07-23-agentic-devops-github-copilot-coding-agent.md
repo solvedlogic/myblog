@@ -6,17 +6,24 @@ categories: [DevOps, AI]
 tags: [github, copilot, agent, devops, agentic, ai]
 image: assets/images/posts/2025-07-23-agentic-devops-github-copilot-coding-agent/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-The evolution of DevOps continues to accelerate, and we're now entering the era of **Agentic DevOps** where AI agents don't just assist with code completion, but actively participate in the entire development lifecycle. GitHub Copilot's Coding Agent represents a significant leap forward, transforming how we approach backlog management, code reviews, and development workflows.
+The evolution of DevOps continues to accelerate, and we're now entering the era
+of **Agentic DevOps** where AI agents don't just assist with code completion,
+but actively participate in the entire development lifecycle. GitHub Copilot's
+Coding Agent represents a significant leap forward, transforming how we approach
+backlog management, code reviews, and development workflows.
 
-In this post, I'll share insights from real-world usage, explore the security considerations, and demonstrate how to maximise efficiency while maintaining quality standards.
+In this post, I'll share insights from real-world usage, explore the security
+considerations, and demonstrate how to maximise efficiency while maintaining
+quality standards.
 
 ## What is GitHub Copilot's Coding Agent?
 
-GitHub Copilot's Coding Agent goes beyond traditional AI assistance. Instead of just suggesting code completions, it can:
+GitHub Copilot's Coding Agent goes beyond traditional AI assistance. Instead of
+just suggesting code completions, it can:
 
 - **Analyse GitHub issues** and understand requirements
 - **Create complete pull requests** with working implementations
@@ -24,11 +31,14 @@ GitHub Copilot's Coding Agent goes beyond traditional AI assistance. Instead of 
 - **Apply consistent coding standards** across your organisation
 - **Work within your security constraints** and branch protection rules
 
-The key difference? This isn't just autocomplete, it's an AI developer that can take ownership of entire tasks.
+The key difference? This isn't just autocomplete, it's an AI developer that can
+take ownership of entire tasks.
 
 ## Behind the Scenes: How the Coding Agent Works
 
-Understanding what happens when the coding agent takes on a task helps you optimise your workflow. Here's the complete journey from issue assignment to merged code:
+Understanding what happens when the coding agent takes on a task helps you
+optimise your workflow. Here's the complete journey from issue assignment to
+merged code:
 
 ### The Complete Workflow
 
@@ -63,7 +73,8 @@ graph TD
 
 ### Phase 1: Understanding Your Request
 
-When you assign the coding agent to an issue, here's what happens in the first few seconds:
+When you assign the coding agent to an issue, here's what happens in the first
+few seconds:
 
 ```mermaid
 flowchart LR
@@ -91,7 +102,8 @@ flowchart LR
 
 ### Phase 2: Implementation in Action
 
-The coding agent works autonomously in its sandboxed environment, following a systematic approach:
+The coding agent works autonomously in its sandboxed environment, following a
+systematic approach:
 
 ```mermaid
 graph TD
@@ -173,8 +185,8 @@ Into this:
 
 ### Context
 
-Our Bicep module `modules/private-dns-zones` currently creates Azure Private DNS zones
-without internet fallback capability.
+Our Bicep module `modules/private-dns-zones` currently creates Azure Private DNS
+zones without internet fallback capability.
 
 ### Requirements
 
@@ -204,14 +216,15 @@ Create templates that guide both humans and AI to provide necessary details:
 ---
 name: Feature Request - Infrastructure
 about: Request new infrastructure features or enhancements
-title: "[FEATURE] "
-labels: ["enhancement", "infrastructure"]
+title: '[FEATURE] '
+labels: ['enhancement', 'infrastructure']
 assignees: []
 ---
 
 ## Feature Request Template
 
-Please provide detailed information to help the coding agent understand your requirements.
+Please provide detailed information to help the coding agent understand your
+requirements.
 
 **Module/Component Name:**
 
@@ -240,19 +253,23 @@ Please provide detailed information to help the coding agent understand your req
 
 ### 3. Add Custom Instructions to your Repository
 
-To guide the coding agent's behaviour, create a `.github/copilot-instructions.md` file:
+To guide the coding agent's behaviour, create a
+`.github/copilot-instructions.md` file:
 
 ```markdown
 ---
-description: "Infrastructure as Code with Bicep"
-applyTo: "**/*.bicep"
+description: 'Infrastructure as Code with Bicep'
+applyTo: '**/*.bicep'
 ---
 
 ## Naming Conventions
 
-- When writing Bicep code, use lowerCamelCase for all names (variables, parameters, resources)
-- Use resource type descriptive symbolic names (e.g., 'storageAccount' not 'storageAccountName')
-- Avoid using 'name' in a symbolic name as it represents the resource, not the resource's name
+- When writing Bicep code, use lowerCamelCase for all names (variables,
+  parameters, resources)
+- Use resource type descriptive symbolic names (e.g., 'storageAccount' not
+  'storageAccountName')
+- Avoid using 'name' in a symbolic name as it represents the resource, not the
+  resource's name
 - Avoid distinguishing variables and parameters by the use of suffixes
 
 ## Structure and Declaration
@@ -264,35 +281,44 @@ applyTo: "**/*.bicep"
 
 ## Parameters
 
-- Set default values that are safe for test environments (use low-cost pricing tiers)
+- Set default values that are safe for test environments (use low-cost pricing
+  tiers)
 - Use @allowed decorator sparingly to avoid blocking valid deployments
 - Use parameters for settings that change between deployments
 
 ## Variables
 
 - Variables automatically infer type from the resolved value
-- Use variables to contain complex expressions instead of embedding them directly in resource properties
+- Use variables to contain complex expressions instead of embedding them
+  directly in resource properties
 
 ## Resource References
 
-- Use symbolic names for resource references instead of reference() or resourceId() functions
-- Create resource dependencies through symbolic names (resourceA.id) not explicit dependsOn
-- For accessing properties from other resources, use the 'existing' keyword instead of passing values through outputs
+- Use symbolic names for resource references instead of reference() or
+  resourceId() functions
+- Create resource dependencies through symbolic names (resourceA.id) not
+  explicit dependsOn
+- For accessing properties from other resources, use the 'existing' keyword
+  instead of passing values through outputs
 
 ## Resource Names
 
-- Use template expressions with uniqueString() to create meaningful and unique resource names
-- Add prefixes to uniqueString() results since some resources don't allow names starting with numbers
+- Use template expressions with uniqueString() to create meaningful and unique
+  resource names
+- Add prefixes to uniqueString() results since some resources don't allow names
+  starting with numbers
 
 ## Child Resources
 
 - Avoid excessive nesting of child resources
-- Use parent property or nesting instead of constructing resource names for child resources
+- Use parent property or nesting instead of constructing resource names for
+  child resources
 
 ## Security
 
 - Never include secrets or keys in outputs
-- Use resource properties directly in outputs (e.g., storageAccount.properties.primaryEndpoints)
+- Use resource properties directly in outputs (e.g.,
+  storageAccount.properties.primaryEndpoints)
 
 ## Documentation
 
@@ -301,10 +327,11 @@ applyTo: "**/*.bicep"
 
 ### 4. Preconfigure the Development Environment for the Agent
 
-To ensure the coding agent operates effectively, preconfigure its development environment by creating a `copilot-setup-steps.yml` file in your repository:
+To ensure the coding agent operates effectively, preconfigure its development
+environment by creating a `copilot-setup-steps.yml` file in your repository:
 
 ```yaml
-name: "Copilot Setup Steps"
+name: 'Copilot Setup Steps'
 
 # Automatically run the setup steps when they are changed to allow for easy validation, and
 # allow manual testing through the repository's "Actions" tab
@@ -337,8 +364,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install JavaScript dependencies
         run: npm ci
@@ -346,21 +373,31 @@ jobs:
 
 ## Real-World Success Story: Azure Private DNS Zones Enhancement
 
-Let me share a concrete example that demonstrates the transformative power of agentic DevOps in action.
+Let me share a concrete example that demonstrates the transformative power of
+agentic DevOps in action.
 
 ### The Challenge
 
-I had a growing backlog of Bicep module improvements, including what seemed like a simple task: enabling internet fallback on a Bicep module that deployed Azure Private DNS zones. This feature enhances DNS resiliency by allowing queries to fall back to internet DNS servers when private resolution fails ([Microsoft's technical deep-dive here](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/enhancing-azure-private-dns-resiliency-with-internet-fallback/4386791)).
+I had a growing backlog of Bicep module improvements, including what seemed like
+a simple task: enabling internet fallback on a Bicep module that deployed Azure
+Private DNS zones. This feature enhances DNS resiliency by allowing queries to
+fall back to internet DNS servers when private resolution fails
+([Microsoft's technical deep-dive here](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/enhancing-azure-private-dns-resiliency-with-internet-fallback/4386791)).
 
-While the implementation was technically straightforward, my focus was elsewhere on higher-priority initiatives. This "simple" task remained stuck in the backlog for weeks, a typical example of how good ideas get delayed by resource constraints.
+While the implementation was technically straightforward, my focus was elsewhere
+on higher-priority initiatives. This "simple" task remained stuck in the backlog
+for weeks, a typical example of how good ideas get delayed by resource
+constraints.
 
 ### The Solution: Delegating to the Coding Agent
 
-Instead of letting this improvement sit in the backlog indefinitely, I decided to experiment with GitHub Copilot's Coding Agent. Here's exactly what happened:
+Instead of letting this improvement sit in the backlog indefinitely, I decided
+to experiment with GitHub Copilot's Coding Agent. Here's exactly what happened:
 
 #### **Step 1: Issue Assignment**
 
-I assigned `copilot` to the existing GitHub issue. No special setup required just a simple issue assignment.
+I assigned `copilot` to the existing GitHub issue. No special setup required
+just a simple issue assignment.
 
 #### **Step 2: Autonomous Analysis**
 
@@ -382,34 +419,49 @@ In under 5 minutes, a pull request appeared with:
 
 #### **Step 4: Standard Review Process**
 
-I reviewed the PR exactly as I would with any team member checking code quality, testing approach, and documentation completeness.
+I reviewed the PR exactly as I would with any team member checking code quality,
+testing approach, and documentation completeness.
 
 ### The Learning: Details Matter
 
 Here's where it gets interesting: **my first attempt wasn't perfect.**
 
-The initial PR implemented internet fallback, but not quite how I envisioned it. The agent had made reasonable assumptions, but they didn't align with my specific architectural preferences. This taught me a crucial lesson that applies to any development collaboration:
+The initial PR implemented internet fallback, but not quite how I envisioned it.
+The agent had made reasonable assumptions, but they didn't align with my
+specific architectural preferences. This taught me a crucial lesson that applies
+to any development collaboration:
 
-> **Whether you're working with a human developer or an AI agent, vague requirements lead to either suboptimal results or requests for clarification.**
+> **Whether you're working with a human developer or an AI agent, vague
+> requirements lead to either suboptimal results or requests for
+> clarification.**
 
-After adding comments to the PR and a bit of back-and-forth discussion, the coding agent quickly iterated on the feedback. It was clear that providing more detailed requirements upfront would have saved time and improved the initial implementation.
+After adding comments to the PR and a bit of back-and-forth discussion, the
+coding agent quickly iterated on the feedback. It was clear that providing more
+detailed requirements upfront would have saved time and improved the initial
+implementation.
 
 ### The Results
 
-With clearer understanding of my requirements from the feedback, the coding agent produced a final implementation that met all my expectations:
+With clearer understanding of my requirements from the feedback, the coding
+agent produced a final implementation that met all my expectations:
 
 - ✅ **Perfect Implementation**: Exactly matched my architectural vision
-- ✅ **Testing**: Included updates to testing files to validate both scenarios (with and without internet fallback)
+- ✅ **Testing**: Included updates to testing files to validate both scenarios
+  (with and without internet fallback)
 - ✅ **Documentation Excellence**: Clear examples and usage guidance
 - ✅ **Zero Rework**: Ready to merge without further changes
 
-I also tested the implementation as we would with any human developer, ensuring it met all acceptance criteria and worked as expected.
+I also tested the implementation as we would with any human developer, ensuring
+it met all acceptance criteria and worked as expected.
 
-The end result was a high-quality, production-ready feature that would have taken hours to implement manually now delivered in under 20 minutes.
+The end result was a high-quality, production-ready feature that would have
+taken hours to implement manually now delivered in under 20 minutes.
 
 ## Security Considerations and Enterprise Readiness
 
-Security is a fundamental consideration when enabling Copilot's coding agent in your organisation. GitHub has built comprehensive security protections into the system, which you can supplement with additional enterprise-grade controls.
+Security is a fundamental consideration when enabling Copilot's coding agent in
+your organisation. GitHub has built comprehensive security protections into the
+system, which you can supplement with additional enterprise-grade controls.
 
 ### Built-in Security Protections
 
@@ -417,32 +469,46 @@ The coding agent comes with robust security measures out of the box:
 
 #### **Governance and Access Control**
 
-- **Subject to Existing Governance**: Organisation settings and enterprise policies automatically apply to the coding agent
-- **User Permission Requirements**: Only users with write access can assign tasks or provide feedback to Copilot
-- **Comments from unauthorised users are ignored**: Users without write access cannot interact with the agent
+- **Subject to Existing Governance**: Organisation settings and enterprise
+  policies automatically apply to the coding agent
+- **User Permission Requirements**: Only users with write access can assign
+  tasks or provide feedback to Copilot
+- **Comments from unauthorised users are ignored**: Users without write access
+  cannot interact with the agent
 
 #### **Restricted Development Environment**
 
-- **Sandboxed Environment**: Copilot works in an isolated development environment with controlled internet access
-- **Read-only Repository Access**: The agent can only read from the assigned repository
-- **GitHub Actions Powered**: Uses GitHub's secure, ephemeral runners for all operations
+- **Sandboxed Environment**: Copilot works in an isolated development
+  environment with controlled internet access
+- **Read-only Repository Access**: The agent can only read from the assigned
+  repository
+- **GitHub Actions Powered**: Uses GitHub's secure, ephemeral runners for all
+  operations
 
 #### **Branch and Code Security**
 
-- **Limited Branch Access**: Can only create and push to branches beginning with `copilot/`
-- **Cannot Push to Main**: Direct pushes to `main` or `master` branches are blocked
-- **Branch Protection Compliance**: Respects all existing branch protection rules and rulesets
-- **Draft PR Security**: Pull requests require approval before GitHub Actions workflows can run
+- **Limited Branch Access**: Can only create and push to branches beginning with
+  `copilot/`
+- **Cannot Push to Main**: Direct pushes to `main` or `master` branches are
+  blocked
+- **Branch Protection Compliance**: Respects all existing branch protection
+  rules and rulesets
+- **Draft PR Security**: Pull requests require approval before GitHub Actions
+  workflows can run
 
 #### **Compliance and Attribution**
 
-- **Co-authored Commits**: All commits are co-authored by the developer who assigned the task
-- **Review Requirements**: The person who requested the PR cannot approve it, maintaining separation of duties
-- **Audit Trail**: Complete session logs provide transparency for compliance requirements
+- **Co-authored Commits**: All commits are co-authored by the developer who
+  assigned the task
+- **Review Requirements**: The person who requested the PR cannot approve it,
+  maintaining separation of duties
+- **Audit Trail**: Complete session logs provide transparency for compliance
+  requirements
 
 ### Advanced Security Configuration
 
-To further enhance security, you can customise the coding agent's behaviour and internet access:
+To further enhance security, you can customise the coding agent's behaviour and
+internet access:
 
 #### **Custom Firewall Management**
 
@@ -455,15 +521,16 @@ firewall:
   recommended_allowlist: true # GitHub's curated safe sites
   custom_allowlist:
     domains:
-      - "packages.company.com" # Internal package repository
-      - "artifacts.internal.corp" # Corporate artifact storage
+      - 'packages.company.com' # Internal package repository
+      - 'artifacts.internal.corp' # Corporate artifact storage
     urls:
-      - "https://api.internal.com/v1/" # Specific API endpoints
+      - 'https://api.internal.com/v1/' # Specific API endpoints
 ```
 
 #### **Firewall Configuration Options**
 
-1. **Recommended Allowlist** (Default): Allows access to common development resources
+1. **Recommended Allowlist** (Default): Allows access to common development
+   resources
 2. **Custom Allowlist**: Add your organisation's internal resources
 3. **Firewall Disabled**: Complete internet access (⚠️ **Not recommended**)
 
@@ -527,7 +594,10 @@ graph LR
 - **Test Results**: Output from automated testing and validation
 - **Error Handling**: How issues were identified and resolved
 
-You can see session logs of running and past agent sessions on the Agents page available at: [https://github.com/copilot/agents](https://github.com/copilot/agents) or via VS Code using the GitHub Pull Requests extension.
+You can see session logs of running and past agent sessions on the Agents page
+available at:
+[https://github.com/copilot/agents](https://github.com/copilot/agents) or via VS
+Code using the GitHub Pull Requests extension.
 
 ## Key Benefits of Agentic DevOps
 
@@ -549,7 +619,8 @@ This frees up your team to focus on:
 
 ### 2. Consistent Quality and Standards
 
-Unlike human developers who might have different coding styles or overlook certain patterns, the coding agent:
+Unlike human developers who might have different coding styles or overlook
+certain patterns, the coding agent:
 
 - Consistently follows established patterns in your codebase
 - Applies coding standards uniformly
@@ -558,7 +629,8 @@ Unlike human developers who might have different coding styles or overlook certa
 
 ### 3. 24/7 Development Capacity
 
-The agent works around the clock, making progress on backlog items while your team sleeps. This is particularly valuable for:
+The agent works around the clock, making progress on backlog items while your
+team sleeps. This is particularly valuable for:
 
 - Global teams across time zones
 - Urgent hotfixes outside business hours
@@ -566,11 +638,13 @@ The agent works around the clock, making progress on backlog items while your te
 
 ## The Future of Agentic DevOps
 
-As we continue to integrate AI agents into our development workflows, several trends are emerging:
+As we continue to integrate AI agents into our development workflows, several
+trends are emerging:
 
 ### 1. Intelligent Task Routing
 
-Future systems will automatically route tasks to the most appropriate resource human or AI, based on complexity, risk, and expertise required.
+Future systems will automatically route tasks to the most appropriate resource
+human or AI, based on complexity, risk, and expertise required.
 
 ### 2. Multi-Agent Collaboration
 
@@ -583,23 +657,34 @@ We're moving toward scenarios where multiple specialised agents collaborate:
 
 ### 3. Continuous Learning
 
-Agents will learn from your organisation's patterns, preferences, and historical decisions to provide increasingly personalised assistance.
+Agents will learn from your organisation's patterns, preferences, and historical
+decisions to provide increasingly personalised assistance.
 
 ## Conclusion
 
-Agentic DevOps with GitHub Copilot's Coding Agent isn't about replacing developers, it's about amplifying human capability and focusing our expertise where it matters most. By delegating routine tasks to AI agents, we can:
+Agentic DevOps with GitHub Copilot's Coding Agent isn't about replacing
+developers, it's about amplifying human capability and focusing our expertise
+where it matters most. By delegating routine tasks to AI agents, we can:
 
 - **Accelerate delivery** of standard features and fixes
 - **Maintain consistency** across our codebase
 - **Focus human creativity** on complex problems and innovation
 - **Scale our development capacity** without proportional team growth
 
-The key to success lies in treating the coding agent like a new team member: provide clear requirements, establish good communication patterns, and gradually build trust through successful collaborations.
+The key to success lies in treating the coding agent like a new team member:
+provide clear requirements, establish good communication patterns, and gradually
+build trust through successful collaborations.
 
-As we've seen with the Private DNS zones example, the quality of input directly correlates with the quality of output. Invest time in creating detailed issues and clear documentation, and you'll find that agentic DevOps becomes a powerful multiplier for your team's productivity.
+As we've seen with the Private DNS zones example, the quality of input directly
+correlates with the quality of output. Invest time in creating detailed issues
+and clear documentation, and you'll find that agentic DevOps becomes a powerful
+multiplier for your team's productivity.
 
-The future of DevOps is not just automated, it's intelligent, collaborative, and surprisingly human in its need for clear communication and well-defined requirements.
+The future of DevOps is not just automated, it's intelligent, collaborative, and
+surprisingly human in its need for clear communication and well-defined
+requirements.
 
 ---
 
-_Have you experimented with GitHub Copilot's Coding Agent in your organisation? I'd love to hear about your experiences and lessons learned._
+_Have you experimented with GitHub Copilot's Coding Agent in your organisation?
+I'd love to hear about your experiences and lessons learned._

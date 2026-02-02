@@ -1,20 +1,31 @@
 ---
 layout: post
-title: "DevOps and Azure Policy Series: Custom Policies"
+title: 'DevOps and Azure Policy Series: Custom Policies'
 date: 2025-05-15 21:30:00 +1100
 categories: [Azure Policy, Bicep]
 tags: [azure, bicep, iac, policy, ci/cd, devops]
 image: assets/images/posts/2025-05-15-devops-azure-policy-series-custom-policies/feature_image.png
 mermaid: enabled
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-Welcome to the second instalment of our DevOps and Azure Policy series! In our [previous post](https://azurewithaj.com/posts/azure-policy-bicep-series-deploy/), we explored how to deploy policy initiatives with built-in policies using Bicep. Today, we're taking it a step further by diving into custom policy definitions and implementing a robust CI/CD pipeline for Azure Policy deployments. We'll leverage the centralised pipelines concept discussed in our [DevOps and Azure IaC Series](https://azurewithaj.com/posts/devops-azure-iac-series-central-pipelines/) to create a streamlined, consistent approach to policy deployment.
+Welcome to the second instalment of our DevOps and Azure Policy series! In our
+[previous post](https://azurewithaj.com/posts/azure-policy-bicep-series-deploy/),
+we explored how to deploy policy initiatives with built-in policies using Bicep.
+Today, we're taking it a step further by diving into custom policy definitions
+and implementing a robust CI/CD pipeline for Azure Policy deployments. We'll
+leverage the centralised pipelines concept discussed in our
+[DevOps and Azure IaC Series](https://azurewithaj.com/posts/devops-azure-iac-series-central-pipelines/)
+to create a streamlined, consistent approach to policy deployment.
 
 ## Understanding Custom Policy Definitions
 
-While Azure offers numerous built-in policies, many organisations have specific compliance requirements that necessitate custom policy definitions. Custom policies allow us to define rules tailored to our unique governance needs, whether that's enforcing specific naming conventions or implementing security controls not covered by built-in policies.
+While Azure offers numerous built-in policies, many organisations have specific
+compliance requirements that necessitate custom policy definitions. Custom
+policies allow us to define rules tailored to our unique governance needs,
+whether that's enforcing specific naming conventions or implementing security
+controls not covered by built-in policies.
 
 ### Anatomy of a Custom Policy Definition
 
@@ -67,13 +78,15 @@ Key components of a custom policy definition:
 - **parameters**: Input values that can be provided when assigning the policy
 - **policyRule**: The core logic, consisting of:
   - **if**: The condition that triggers the policy evaluation
-  - **then**: The action to take when the condition is met (e.g., audit, deny, modify)
+  - **then**: The action to take when the condition is met (e.g., audit, deny,
+    modify)
 
 ## Creating Custom Policy Definitions with Bicep
 
 Now, let's implement a custom policy definition using Bicep.
 
-1. First lets create a Bicep module that allows us to create a custom policy definition:
+1. First lets create a Bicep module that allows us to create a custom policy
+   definition:
 
 ```bicep
 // create-custom-policy-definition.bicep
@@ -127,7 +140,9 @@ output name string = policyDefinition.name
 output resourceId string = policyDefinition.id
 ```
 
-2. Next, we can create a custom policy definition using the module we just created. We'll implement an approach that enables us to store policy definitions as JSON files and manage multiple policies easily:
+2. Next, we can create a custom policy definition using the module we just
+   created. We'll implement an approach that enables us to store policy
+   definitions as JSON files and manage multiple policies easily:
 
 ```bicep
 // policy-definitions.bicep
@@ -166,7 +181,9 @@ param policyFiles = [
 
 ## Creating Custom Policy Initiatives
 
-Once you have created multiple custom policies, you'll likely want to group them into initiatives for easier management. Here's how we create an initiative that combines custom and built-in policies:
+Once you have created multiple custom policies, you'll likely want to group them
+into initiatives for easier management. Here's how we create an initiative that
+combines custom and built-in policies:
 
 ```bicep
 // security-initiative.bicep
@@ -244,7 +261,10 @@ param policyDefinitionManagementGroupId = 'platform-mg'
 
 ## CI/CD for Azure Policy Using Centralised Pipelines
 
-Now that we've established how to create and deploy custom policies with Bicep, let's implement a CI/CD pipeline to automate their deployment. We'll leverage the centralised pipeline approach discussed in our [DevOps and Azure IaC Series](https://azurewithaj.com/posts/devops-azure-iac-series-central-pipelines).
+Now that we've established how to create and deploy custom policies with Bicep,
+let's implement a CI/CD pipeline to automate their deployment. We'll leverage
+the centralised pipeline approach discussed in our
+[DevOps and Azure IaC Series](https://azurewithaj.com/posts/devops-azure-iac-series-central-pipelines).
 
 ### Workflow Overview
 
@@ -285,7 +305,8 @@ flowchart TD
 
 ### Implementation with GitHub Actions
 
-Here's how to implement a CI/CD pipeline for Azure Policy using GitHub Actions and our centralised pipeline approach:
+Here's how to implement a CI/CD pipeline for Azure Policy using GitHub Actions
+and our centralised pipeline approach:
 
 ```yaml
 {% raw %}
@@ -468,19 +489,27 @@ jobs:
 {% endraw %}
 ```
 
-To demonstrate this, I’ve added a complete example to the repository linked below.
+To demonstrate this, I’ve added a complete example to the repository linked
+below.
 
 [Click here to view an example of a policy initiative with custom policies using Bicep](https://github.com/tw3lveparsecs/azure-policy-with-bicep/tree/main/initiative-with-custom-policies)
 
 ## Conclusion
 
-Custom Azure Policy definitions deployed through CI/CD pipelines using Bicep provide a powerful mechanism for enforcing governance at scale. By leveraging centralised pipelines, we can ensure consistent, version-controlled policy deployments across our Azure environment.
+Custom Azure Policy definitions deployed through CI/CD pipelines using Bicep
+provide a powerful mechanism for enforcing governance at scale. By leveraging
+centralised pipelines, we can ensure consistent, version-controlled policy
+deployments across our Azure environment.
 
 This approach offers several advantages:
 
-1. **Version Control**: All policy definitions are stored in git, providing history and auditability
+1. **Version Control**: All policy definitions are stored in git, providing
+   history and auditability
 2. **Automation**: CI/CD eliminates manual policy deployment steps
-3. **Consistency**: Centralised pipelines ensure standardised deployment approaches
-4. **Scalability**: Easy to manage multiple custom policies by loading them from JSON files into Bicep
+3. **Consistency**: Centralised pipelines ensure standardised deployment
+   approaches
+4. **Scalability**: Easy to manage multiple custom policies by loading them from
+   JSON files into Bicep
 
-In our next article, we'll explore advanced Azure Policy scenarios, including policy exemptions. Stay tuned!
+In our next article, we'll explore advanced Azure Policy scenarios, including
+policy exemptions. Stay tuned!

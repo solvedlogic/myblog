@@ -1,29 +1,47 @@
 ---
 layout: post
-title: "Welcome Home, Agents: How GitHub Copilot Agent HQ is Transforming Development Workflows"
+title:
+  'Welcome Home, Agents: How GitHub Copilot Agent HQ is Transforming Development
+  Workflows'
 date: 2025-11-17 06:00:00 +1100
 categories: [DevOps, AI]
 tags: [github, copilot, agent, devops, agentic, ai, vscode, hq]
 image: assets/images/posts/2025-11-17-welcome-home-agents/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-The development landscape has fundamentally shifted. We're no longer working with simple AI assistants that complete our code,we're orchestrating fleets of specialised agents that can take on entire features, collaborate across tools, and work asynchronously while we sleep. GitHub's announcement of **Agent HQ** at Universe 2025 marks a pivotal moment in how we think about development workflows, and the accompanying VS Code updates make this vision tangible today.
+The development landscape has fundamentally shifted. We're no longer working
+with simple AI assistants that complete our code,we're orchestrating fleets of
+specialised agents that can take on entire features, collaborate across tools,
+and work asynchronously while we sleep. GitHub's announcement of **Agent HQ** at
+Universe 2025 marks a pivotal moment in how we think about development
+workflows, and the accompanying VS Code updates make this vision tangible today.
 
-After spending the last few months working deeply with GitHub Copilot's coding agent and now experimenting with the latest VS Code agent integrations, I've witnessed firsthand how this transformation changes everything from how we plan work to how we manage our development sessions. This isn't hype,it's a fundamental shift in how development teams operate.
+After spending the last few months working deeply with GitHub Copilot's coding
+agent and now experimenting with the latest VS Code agent integrations, I've
+witnessed firsthand how this transformation changes everything from how we plan
+work to how we manage our development sessions. This isn't hype,it's a
+fundamental shift in how development teams operate.
 
 ## The Problem: Fragmented Agent Experiences
 
-Before Agent HQ, working with AI agents felt like managing multiple contractors who all used different communication channels, had no visibility into each other's work, and required constant context switching. You might have:
+Before Agent HQ, working with AI agents felt like managing multiple contractors
+who all used different communication channels, had no visibility into each
+other's work, and required constant context switching. You might have:
 
 - **GitHub Copilot coding agent** running on GitHub.com
 - **VS Code local chat sessions** for immediate help
 - **GitHub Copilot CLI** for terminal commands
-- **Third-party agents** like OpenAI Codex or Anthropic Claude in their native interfaces
+- **Third-party agents** like OpenAI Codex or Anthropic Claude in their native
+  interfaces
 
-Each operated in its own silo. You'd assign work to a coding agent on GitHub, switch to VS Code to write some code with chat assistance, jump to the terminal for CLI help, and then try to mentally piece together what was happening across all these sessions. The cognitive overhead was immense, and the lack of unified visibility meant agents couldn't benefit from each other's context.
+Each operated in its own silo. You'd assign work to a coding agent on GitHub,
+switch to VS Code to write some code with chat assistance, jump to the terminal
+for CLI help, and then try to mentally piece together what was happening across
+all these sessions. The cognitive overhead was immense, and the lack of unified
+visibility meant agents couldn't benefit from each other's context.
 
 ```mermaid
 graph TD
@@ -46,9 +64,15 @@ graph TD
 
 ## The Vision: Agent HQ as Your Development Command Centre
 
-[GitHub's Agent HQ](https://github.blog/news-insights/company-news/welcome-home-agents/) fundamentally reimagines this experience. Instead of disconnected tools, you get **mission control**,a unified command centre that follows you wherever you work. Whether you're in VS Code, on GitHub.com, using the CLI, or even on mobile, you have consistent visibility and control over all your agents.
+[GitHub's Agent HQ](https://github.blog/news-insights/company-news/welcome-home-agents/)
+fundamentally reimagines this experience. Instead of disconnected tools, you get
+**mission control**,a unified command centre that follows you wherever you work.
+Whether you're in VS Code, on GitHub.com, using the CLI, or even on mobile, you
+have consistent visibility and control over all your agents.
 
-The core principle is elegant: **GitHub is your Agent HQ**. It's where agents live, work, and collaborate, just like human developers do through pull requests and issues.
+The core principle is elegant: **GitHub is your Agent HQ**. It's where agents
+live, work, and collaborate, just like human developers do through pull requests
+and issues.
 
 ```mermaid
 graph TD
@@ -76,16 +100,21 @@ graph TD
 
 ## The Game Changer: Agent Sessions View in VS Code
 
-The October 2025 VS Code release (v1.106) brings Agent HQ directly into your editor with the **Agent Sessions view**. This is now enabled by default and provides centralised management of all your active agent sessions, both local and remote.
+The October 2025 VS Code release (v1.106) brings Agent HQ directly into your
+editor with the **Agent Sessions view**. This is now enabled by default and
+provides centralised management of all your active agent sessions, both local
+and remote.
 
 ### What the Agent Sessions View Gives You
 
-The Agent Sessions view is organised by source, making it easy to see exactly what's happening across your development environment:
+The Agent Sessions view is organised by source, making it easy to see exactly
+what's happening across your development environment:
 
 - **Local Chat Sessions**: Your VS Code chat conversations
 - **Copilot Coding Agent**: Background agent sessions running on GitHub
 - **GitHub Copilot CLI**: Terminal-based agent sessions
-- **Third-Party Agents**: Sessions from OpenAI Codex, Anthropic Claude, and others
+- **Third-Party Agents**: Sessions from OpenAI Codex, Anthropic Claude, and
+  others
 
 ```mermaid
 graph LR
@@ -127,15 +156,21 @@ Here's how this changes your daily workflow:
 6. All without leaving your editor
 ```
 
-You can search sessions (`Ctrl+Alt+F`), quickly jump between them, and see the status of background work at a glance. The view also supports a consolidated single-view mode if you prefer everything in one place.
+You can search sessions (`Ctrl+Alt+F`), quickly jump between them, and see the
+status of background work at a glance. The view also supports a consolidated
+single-view mode if you prefer everything in one place.
 
 ## Plan Agent: The Strategic Thinking Partner
 
-One of the most impactful additions is the **Plan Agent**, available via the agents dropdown in the Chat view. This fundamentally changes how I approach complex features.
+One of the most impactful additions is the **Plan Agent**, available via the
+agents dropdown in the Chat view. This fundamentally changes how I approach
+complex features.
 
 ### Why Planning Matters More Than Ever
 
-I've learned from my agentic DevOps journey that the quality of AI output directly correlates with the quality of planning input. The Plan Agent addresses this by helping you:
+I've learned from my agentic DevOps journey that the quality of AI output
+directly correlates with the quality of planning input. The Plan Agent addresses
+this by helping you:
 
 1. **Break down complex tasks** into step-by-step implementation plans
 2. **Ask clarifying questions** to ensure all requirements are captured
@@ -165,33 +200,43 @@ graph TD
     style G fill:#f59e0b,stroke:#d97706,stroke-width:3px,color:#fff
 ```
 
-The beauty is that you invest time upfront in the plan, catching gaps and missing decisions early, before any code is written. This dramatically reduces rework and improves the final implementation quality.
+The beauty is that you invest time upfront in the plan, catching gaps and
+missing decisions early, before any code is written. This dramatically reduces
+rework and improves the final implementation quality.
 
 ### Custom Plan Agents for Your Team
 
-VS Code also lets you create custom plan agents tailored to your organization's workflows. Using the "Configure Custom Agent" menu, you can:
+VS Code also lets you create custom plan agents tailored to your organization's
+workflows. Using the "Configure Custom Agent" menu, you can:
 
 - Copy the built-in plan agent as a starting point
 - Customise planning style to match your methodology (Agile, Waterfall, etc.)
 - Define specific tools and prompts for your domain
 - Set organization-specific guidelines and constraints
 
-This means your team can have consistent planning approaches while maintaining flexibility for different project types.
+This means your team can have consistent planning approaches while maintaining
+flexibility for different project types.
 
 ## Cloud Agents: Seamless Background Execution
 
-The October VS Code release migrated the Copilot coding agent integration from the GitHub Pull Request extension directly into the Copilot Chat extension. This might seem like a small technical change, but it's actually huge for the user experience.
+The October VS Code release migrated the Copilot coding agent integration from
+the GitHub Pull Request extension directly into the Copilot Chat extension. This
+might seem like a small technical change, but it's actually huge for the user
+experience.
 
 ### What Changed and Why It Matters
 
-**Before:** Coding agent functionality felt bolted on, living in a separate extension with different behaviours and limited integration.
+**Before:** Coding agent functionality felt bolted on, living in a separate
+extension with different behaviours and limited integration.
 
 **Now:** Cloud agents are first-class citizens in VS Code, providing:
 
 - **Native experience**: Same interface patterns as local chat
-- **Bidirectional transitions**: Smoothly move between VS Code and GitHub Mission Control
+- **Bidirectional transitions**: Smoothly move between VS Code and GitHub
+  Mission Control
 - **Unified context**: Cloud agents benefit from your local workspace context
-- **Consistent delegation**: Delegate work to cloud agents using familiar patterns
+- **Consistent delegation**: Delegate work to cloud agents using familiar
+  patterns
 
 ### Example Cloud Agent Workflow
 
@@ -200,7 +245,8 @@ Here's how cloud agents fit into a typical development day:
 ```markdown
 **Morning:** Assign 3 issues to Copilot coding agent on GitHub.com
 
-**During the Day:** Work on other tasks, occasionally checking Agent Sessions view
+**During the Day:** Work on other tasks, occasionally checking Agent Sessions
+view
 
 **Afternoon:** Coding agent creates PRs for 2 completed issues
 
@@ -211,7 +257,9 @@ Here's how cloud agents fit into a typical development day:
 **Next Morning:** PRs ready to merge
 ```
 
-The key insight: **You're not blocked waiting for implementations**. You maintain momentum on strategic work while agents handle the execution heavy lifting.
+The key insight: **You're not blocked waiting for implementations**. You
+maintain momentum on strategic work while agents handle the execution heavy
+lifting.
 
 ```mermaid
 sequenceDiagram
@@ -245,7 +293,9 @@ sequenceDiagram
 
 ## CLI Agents: Terminal Intelligence
 
-The GitHub Copilot CLI integration brings agents directly into your terminal workflow. This is particularly powerful for complex command sequences and system administration tasks.
+The GitHub Copilot CLI integration brings agents directly into your terminal
+workflow. This is particularly powerful for complex command sequences and system
+administration tasks.
 
 ### How CLI Agents Work in VS Code
 
@@ -292,16 +342,21 @@ VS Code now provides two ways to work with CLI agents:
 
 ### CLI Edit Tracking
 
-A particularly useful feature: chat edit sessions now track edits made by CLI agents. When you create sessions from the Agent Sessions view, you can see edits through:
+A particularly useful feature: chat edit sessions now track edits made by CLI
+agents. When you create sessions from the Agent Sessions view, you can see edits
+through:
 
 - **Inline edit pills**: Visual indicators in your code
 - **Working set view**: Comprehensive list of all changed files
 
-This means you maintain full visibility into what CLI agents modify, just like you would with local chat sessions or coding agents.
+This means you maintain full visibility into what CLI agents modify, just like
+you would with local chat sessions or coding agents.
 
 ## Agent Delegation: Orchestrating Specialised Work
 
-The delegation model is where Agent HQ truly shines. Instead of doing everything yourself, you can delegate specific tasks to the most appropriate agent for the job.
+The delegation model is where Agent HQ truly shines. Instead of doing everything
+yourself, you can delegate specific tasks to the most appropriate agent for the
+job.
 
 ### How Delegation Works
 
@@ -314,7 +369,9 @@ From any chat session, you can:
 
 **From CLI to Coding Agent:**
 
-The `/delegate` command in CLI editors or terminal instances allows you to hand off work directly to the Copilot coding agent. This is incredibly useful when you realise a terminal task requires broader codebase changes.
+The `/delegate` command in CLI editors or terminal instances allows you to hand
+off work directly to the Copilot coding agent. This is incredibly useful when
+you realise a terminal task requires broader codebase changes.
 
 ```bash
 # In CLI agent session
@@ -331,11 +388,14 @@ The `/delegate` command in CLI editors or terminal instances allows you to hand 
 
 A strategic mental model for choosing the right agent for each task:
 
-- **Local Chat (VS Code)**: Quick questions, code explanations, immediate assistance
-- **Plan Agent**: Strategic planning, requirement refinement, architectural decisions
+- **Local Chat (VS Code)**: Quick questions, code explanations, immediate
+  assistance
+- **Plan Agent**: Strategic planning, requirement refinement, architectural
+  decisions
 - **Coding Agent**: Feature implementation, bug fixes, pattern replication
 - **CLI Agent**: Deployment commands, system configuration, troubleshooting
-- **Third-Party Agents**: Specialised tasks (e.g., OpenAI Codex for Python, Claude for documentation)
+- **Third-Party Agents**: Specialised tasks (e.g., OpenAI Codex for Python,
+  Claude for documentation)
 
 ```mermaid
 graph TD
@@ -370,14 +430,17 @@ graph TD
 
 ## Custom Agents: Tailoring AI to Your Workflow
 
-One of the most powerful features is the ability to create custom agents with `.agent.md` files. These replace the previous "chat modes" and are now compatible across VS Code, GitHub Copilot Cloud Agents, and GitHub CLI.
+One of the most powerful features is the ability to create custom agents with
+`.agent.md` files. These replace the previous "chat modes" and are now
+compatible across VS Code, GitHub Copilot Cloud Agents, and GitHub CLI.
 
 ### Why Custom Agents Matter
 
 Custom agents let you:
 
 - **Encode team knowledge**: Specific patterns, conventions, and best practices
-- **Create specialists**: Security-focused agents, testing agents, documentation agents
+- **Create specialists**: Security-focused agents, testing agents, documentation
+  agents
 - **Define workflows**: Multi-step processes unique to your organization
 - **Control behaviours**: Precise guardrails and guidelines for AI behaviour
 
@@ -387,10 +450,11 @@ Custom agent files live in `.github/agents/` and use the `.agent.md` suffix:
 
 ```markdown
 ---
-description: Generate an implementation plan for new features or refactoring existing code.
+description:
+  Generate an implementation plan for new features or refactoring existing code.
 name: Planner
 target: vscode
-tools: ["fetch", "githubRepo", "search", "usages"]
+tools: ['fetch', 'githubRepo', 'search', 'usages']
 model: Claude Sonnet 4
 handoffs:
   - label: Implement Plan
@@ -401,20 +465,25 @@ handoffs:
 
 # Planning instructions
 
-You are in planning mode. Your task is to generate an implementation plan for a new feature or for refactoring existing code.
-Don't make any code edits, just generate a plan.
+You are in planning mode. Your task is to generate an implementation plan for a
+new feature or for refactoring existing code. Don't make any code edits, just
+generate a plan.
 
-The plan consists of a Markdown document that describes the implementation plan, including the following sections:
+The plan consists of a Markdown document that describes the implementation plan,
+including the following sections:
 
 - Overview: A brief description of the feature or refactoring task.
 - Requirements: A list of requirements for the feature or refactoring task.
-- Implementation Steps: A detailed list of steps to implement the feature or refactoring task.
-- Testing: A list of tests that need to be implemented to verify the feature or refactoring task.
+- Implementation Steps: A detailed list of steps to implement the feature or
+  refactoring task.
+- Testing: A list of tests that need to be implemented to verify the feature or
+  refactoring task.
 ```
 
 ### Custom Agent Metadata
 
-The `target` property is particularly important as it determines how the agent runs:
+The `target` property is particularly important as it determines how the agent
+runs:
 
 **`target: vscode`**: Optimised for local VS Code chat with access to:
 
@@ -435,7 +504,8 @@ The `target` property is particularly important as it determines how the agent r
 
 ### Agent Handoffs: Workflow Orchestration
 
-The `handoffs` property enables guided transitions between agents, letting you chain multi-step workflows:
+The `handoffs` property enables guided transitions between agents, letting you
+chain multi-step workflows:
 
 ```markdown
 ---
@@ -452,7 +522,8 @@ handoffs: [plan-agent, testing-agent, security-agent, documentation-agent]
 5. Hand off to documentation-agent for docs
 ```
 
-This creates a pipeline where each agent specialises in its domain, but they work together seamlessly.
+This creates a pipeline where each agent specialises in its domain, but they
+work together seamlessly.
 
 ### VS Code Agent File Editing
 
@@ -463,15 +534,18 @@ The VS Code editor now provides rich support for `.agent.md` files:
 - **Hovers**: Documentation for each property
 - **Code actions**: Quick fixes and migrations
 
-There's even an auto-migration feature for older `.chatmode.md` files with a quick fix to convert them to the new format.
+There's even an auto-migration feature for older `.chatmode.md` files with a
+quick fix to convert them to the new format.
 
 ## Enterprise Considerations: Control and Governance
 
-With great power comes great responsibility. Agent HQ includes enterprise-grade controls that I consider essential for production use.
+With great power comes great responsibility. Agent HQ includes enterprise-grade
+controls that I consider essential for production use.
 
 ### The Agent Control Plane
 
-GitHub's control plane provides centralised governance for AI agents across your organization:
+GitHub's control plane provides centralised governance for AI agents across your
+organization:
 
 - **Agent Access Control**: Define which agents are allowed in your org
 - **Model Access Management**: Control access to specific AI models
@@ -492,7 +566,8 @@ Utilise branch controls provide granular oversight:
 - Require approval from someone other than the task requester
 ```
 
-This ensures agent-created code goes through the same rigour as human-written code.
+This ensures agent-created code goes through the same rigour as human-written
+code.
 
 ### Identity and Attribution
 
@@ -505,7 +580,8 @@ All agent work is properly attributed:
 
 ## Security Best Practices with Agent HQ
 
-Working with AI agents introduces new security considerations. Here's how to maintain security hygiene while leveraging Agent HQ's capabilities:
+Working with AI agents introduces new security considerations. Here's how to
+maintain security hygiene while leveraging Agent HQ's capabilities:
 
 ### 1. Start with Recommended Defaults
 
@@ -540,13 +616,14 @@ firewall:
   recommended_allowlist: true
   custom_allowlist:
     domains:
-      - "artifacts.company.internal"
-      - "packages.company.internal"
+      - 'artifacts.company.internal'
+      - 'packages.company.internal'
 ```
 
 ### 4. Review Session Logs
 
-Make it a practice to review agent session logs at [github.com/copilot/agents](https://github.com/copilot/agents):
+Make it a practice to review agent session logs at
+[github.com/copilot/agents](https://github.com/copilot/agents):
 
 - **Internal reasoning**: Understand the agent's decision-making
 - **Tool usage**: What commands were executed
@@ -555,11 +632,14 @@ Make it a practice to review agent session logs at [github.com/copilot/agents](h
 
 ## The GitHub MCP Registry: Extending Agent Capabilities
 
-VS Code is the only editor that supports the full Model Context Protocol (MCP) specification, and the October release makes it even better with the GitHub MCP Registry integration.
+VS Code is the only editor that supports the full Model Context Protocol (MCP)
+specification, and the October release makes it even better with the GitHub MCP
+Registry integration.
 
 ### What is MCP?
 
-Model Context Protocol allows agents to interact with external services and data sources. Think of it as APIs for AI agents.
+Model Context Protocol allows agents to interact with external services and data
+sources. Think of it as APIs for AI agents.
 
 ### One-Click MCP Server Installation
 
@@ -570,7 +650,8 @@ The GitHub MCP Registry in VS Code lets you:
 3. **Enable**: Instant availability for all agents
 4. **Configure**: Workspace or user-level installation
 
-This means your agents can interact with your tools and services without custom integration work.
+This means your agents can interact with your tools and services without custom
+integration work.
 
 ### Creating Custom Agents with MCP Tools
 
@@ -598,20 +679,24 @@ When deploying:
 
 ## Example Workflow: Putting It All Together
 
-Let us walk through how we can use all these features together in a typical development scenario.
+Let us walk through how we can use all these features together in a typical
+development scenario.
 
 ### Scenario: Adding a Complex Feature to an Infrastructure Project
 
 **Step 1: Planning with Plan Agent (10 minutes)**
 
 ```markdown
-Me: I need to add geo-redundant disaster recovery to our Azure landing zone pattern
+Me: I need to add geo-redundant disaster recovery to our Azure landing zone
+pattern
 
-Plan Agent: [Asks clarifying questions about RPO/RTO requirements, budget constraints, region preferences]
+Plan Agent: [Asks clarifying questions about RPO/RTO requirements, budget
+constraints, region preferences]
 
 [After discussion...]
 
-Plan Agent: Here's your comprehensive plan with 4 phases, 15 tasks, dependencies mapped...
+Plan Agent: Here's your comprehensive plan with 4 phases, 15 tasks, dependencies
+mapped...
 ```
 
 **Step 2: Create Backlog Items**
@@ -619,14 +704,17 @@ Plan Agent: Here's your comprehensive plan with 4 phases, 15 tasks, dependencies
 Using the awesome-copilot prompts (via MCP server):
 
 ```markdown
-@copilot Use the create-github-issues-from-plan prompt to generate issues from this plan
+@copilot Use the create-github-issues-from-plan prompt to generate issues from
+this plan
 
-[Generates 15 detailed GitHub issues with descriptions, acceptance criteria, dependencies]
+[Generates 15 detailed GitHub issues with descriptions, acceptance criteria,
+dependencies]
 ```
 
 **Step 3: Delegate to Coding Agent**
 
-Assign issues to `@copilot` on GitHub.com. Monitor progress via Agent Sessions view in VS Code.
+Assign issues to `@copilot` on GitHub.com. Monitor progress via Agent Sessions
+view in VS Code.
 
 **Step 4: Parallel Development**
 
@@ -653,7 +741,8 @@ Use CLI agent to:
 - Run integration tests
 - Monitor with MCP-connected tools
 
-**The Result:** Feature delivered in days instead of weeks, with consistent quality and complete documentation.
+**The Result:** Feature delivered in days instead of weeks, with consistent
+quality and complete documentation.
 
 ```mermaid
 gantt
@@ -693,14 +782,16 @@ Over the coming months, agents from these providers will be available:
 - **Cognition**: Specialised development workflows
 - **xAI**: Elon Musk's AI coding assistant
 
-All accessible through your existing GitHub Copilot subscription, no additional accounts needed.
+All accessible through your existing GitHub Copilot subscription, no additional
+accounts needed.
 
 ### Enhanced Mission Control
 
 Upcoming improvements to mission control:
 
 - **Mobile app access**: Monitor agents from anywhere
-- **Slack/Linear/Teams integrations**: Agent notifications in your workflow tools
+- **Slack/Linear/Teams integrations**: Agent notifications in your workflow
+  tools
 - **Advanced delegation**: More sophisticated task routing
 - **Multi-agent collaboration**: Agents working together on complex tasks
 
@@ -714,15 +805,29 @@ GitHub Code Quality (in public preview) will integrate with Agent HQ to:
 
 ## Conclusion: A New Era of Development
 
-Agent HQ represents a fundamental shift in how we think about development teams. We're moving from a world where developers write all code to one where developers orchestrate specialised agents that handle implementation while humans focus on strategy, architecture, and quality.
+Agent HQ represents a fundamental shift in how we think about development teams.
+We're moving from a world where developers write all code to one where
+developers orchestrate specialised agents that handle implementation while
+humans focus on strategy, architecture, and quality.
 
-The VS Code October 2025 release makes this vision tangible. With the Agent Sessions view, Plan Agent, cloud agents, CLI integration, custom agents, and MCP support, we now have a cohesive environment for agentic development.
+The VS Code October 2025 release makes this vision tangible. With the Agent
+Sessions view, Plan Agent, cloud agents, CLI integration, custom agents, and MCP
+support, we now have a cohesive environment for agentic development.
 
-What strikes me most is how natural it feels. Yes, there's a learning curve and some rough edges to smooth out, but the core experience of working with agents through Agent HQ feels intuitive. It's not bolted-on AI,it's AI integrated into the development workflow we already know.
+What strikes me most is how natural it feels. Yes, there's a learning curve and
+some rough edges to smooth out, but the core experience of working with agents
+through Agent HQ feels intuitive. It's not bolted-on AI,it's AI integrated into
+the development workflow we already know.
 
-The key insight: **This isn't about AI replacing developers. It's about transforming development from a primarily solitary activity to an orchestrated collaboration between humans and specialised agents.** The developer's role evolves from writing every line of code to designing systems, defining requirements, reviewing implementations, and making strategic decisions.
+The key insight: **This isn't about AI replacing developers. It's about
+transforming development from a primarily solitary activity to an orchestrated
+collaboration between humans and specialised agents.** The developer's role
+evolves from writing every line of code to designing systems, defining
+requirements, reviewing implementations, and making strategic decisions.
 
-For those of us who have spent years in DevOps, this is the natural evolution we've been working toward: automation that doesn't just handle repetitive tasks but actively participates in the creative process of building software.
+For those of us who have spent years in DevOps, this is the natural evolution
+we've been working toward: automation that doesn't just handle repetitive tasks
+but actively participates in the creative process of building software.
 
 **Ready to embrace Agent HQ?** Start small:
 
@@ -736,4 +841,6 @@ The future of development is here. Welcome home, agents.
 
 ---
 
-_Have you started working with Agent HQ and the new VS Code agent features? I'd love to hear about your experiences and what patterns you've discovered. Share your thoughts in the comments below._
+_Have you started working with Agent HQ and the new VS Code agent features? I'd
+love to hear about your experiences and what patterns you've discovered. Share
+your thoughts in the comments below._

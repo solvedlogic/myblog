@@ -1,21 +1,34 @@
 ---
 layout: post
-title: "DevOps and AI Series: Managing AI Models"
+title: 'DevOps and AI Series: Managing AI Models'
 date: 2025-02-10 07:00:00 +1100
 categories: [DevOps, AI]
 tags: [ai, devops, ai models, azure]
 image: assets/images/posts/2025-02-10-devops-ai-series-ai-models/feature_image.png
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-Welcome back to our series on AI and DevOps! In our previous post, we laid the groundwork for deploying AI landing zones within a DevOps framework. Today, we’re going to focus on a critical aspect of this integration: managing AI models using DevOps practices. This involves not only the technical automation of deployments but also ensuring seamless collaboration between the teams involved.
+Welcome back to our series on AI and DevOps! In our previous post, we laid the
+groundwork for deploying AI landing zones within a DevOps framework. Today,
+we’re going to focus on a critical aspect of this integration: managing AI
+models using DevOps practices. This involves not only the technical automation
+of deployments but also ensuring seamless collaboration between the teams
+involved.
 
 ### Who Manages AI Model Deployments: Platform Team or Application Team?
 
-When services like Azure OpenAI or Azure AI Foundry are deployed to Azure, they often follow a shared service model—where the service is accessible to multiple teams for consumption—or a distributed model, where the service is deployed to a specific team or application.
+When services like Azure OpenAI or Azure AI Foundry are deployed to Azure, they
+often follow a shared service model—where the service is accessible to multiple
+teams for consumption—or a distributed model, where the service is deployed to a
+specific team or application.
 
-One of the most overlooked aspects of deploying AI models is clarifying responsibility. In a distributed model, ownership is generally more straightforward than in a shared service model. Should the platform team oversee these deployments, or should the application team lead the effort? This decision significantly influences both efficiency and outcomes in your deployment process.
+One of the most overlooked aspects of deploying AI models is clarifying
+responsibility. In a distributed model, ownership is generally more
+straightforward than in a shared service model. Should the platform team oversee
+these deployments, or should the application team lead the effort? This decision
+significantly influences both efficiency and outcomes in your deployment
+process.
 
 Here are some key considerations for each approach:
 
@@ -31,15 +44,27 @@ Here are some key considerations for each approach:
 - Faster, more tailored deployments.
 - Potentially inconsistent practices across different teams.
 
-Ultimately, the best approach depends on your organisation’s structure, culture, and requirements. A hybrid model, where the platform team sets up the codebase to deploy AI models and the application team customises it for their needs, can offer the best of both worlds.
+Ultimately, the best approach depends on your organisation’s structure, culture,
+and requirements. A hybrid model, where the platform team sets up the codebase
+to deploy AI models and the application team customises it for their needs, can
+offer the best of both worlds.
 
 ### Automating AI Model Deployments
 
-Automation is a cornerstone of DevOps, and AI model deployments are no exception. By automating the deployment process, we can ensure consistency, reduce errors, and speed up the time to market for our AI models.
+Automation is a cornerstone of DevOps, and AI model deployments are no
+exception. By automating the deployment process, we can ensure consistency,
+reduce errors, and speed up the time to market for our AI models.
 
-We can automate AI model deployments using native tools like Azure Bicep and Azure DevOps or GitHub.
+We can automate AI model deployments using native tools like Azure Bicep and
+Azure DevOps or GitHub.
 
-In the following example, we assume that the Landing Zone has been established and Azure OpenAI has been deployed using a shared service model. The platform team is responsible for setting up the codebase for AI model deployments, while the application team can add and manage models as needed. This hybrid approach leverages a GitOps methodology, allowing the application team to make changes to the codebase and deploy AI models through pull requests, subject to the platform team’s approval.
+In the following example, we assume that the Landing Zone has been established
+and Azure OpenAI has been deployed using a shared service model. The platform
+team is responsible for setting up the codebase for AI model deployments, while
+the application team can add and manage models as needed. This hybrid approach
+leverages a GitOps methodology, allowing the application team to make changes to
+the codebase and deploy AI models through pull requests, subject to the platform
+team’s approval.
 
 This has been illustrated in the diagram below:
 
@@ -47,16 +72,24 @@ This has been illustrated in the diagram below:
 
 Breaking down the process:
 
-- Set up a GitHub repository to store the Bicep templates for deploying AI models.
-- Create a parameter file that specifies the models to deploy to an existing Azure OpenAI instance.
-- Use GitHub Actions to build and validate the Bicep templates and deploy the AI models.
-- The application team can make changes to the parameter file and submit a pull request to deploy new models.
+- Set up a GitHub repository to store the Bicep templates for deploying AI
+  models.
+- Create a parameter file that specifies the models to deploy to an existing
+  Azure OpenAI instance.
+- Use GitHub Actions to build and validate the Bicep templates and deploy the AI
+  models.
+- The application team can make changes to the parameter file and submit a pull
+  request to deploy new models.
 - The platform team reviews the pull request and approves the deployment.
-- GitHub Actions automatically deploys the AI models to the Azure OpenAI instance.
-- The platform team can monitor the deployments and manage the resources as needed.
-- The application team can access the deployed models and integrate them into their applications.
+- GitHub Actions automatically deploys the AI models to the Azure OpenAI
+  instance.
+- The platform team can monitor the deployments and manage the resources as
+  needed.
+- The application team can access the deployed models and integrate them into
+  their applications.
 
-**Example of Bicep parameter file to manage AI models for an existing Azure OpenAI instance:**
+**Example of Bicep parameter file to manage AI models for an existing Azure
+OpenAI instance:**
 
 ```
 param location = 'australiaeast'
@@ -85,7 +118,8 @@ param openaiDeployments = [ // This is where the application team can specify th
 
 > **NOTE**
 >
-> This is using the build and deploy GitHub reusable workflows that we discussed in the DevOps and Azure IaC Series (links to posts below).
+> This is using the build and deploy GitHub reusable workflows that we discussed
+> in the DevOps and Azure IaC Series (links to posts below).
 >
 > - [DevOps and IaC Series: Build](https://azurewithaj.com/posts/azure-iac-devops-series-build/)
 > - [DevOps and IaC Series: Deploy](https://azurewithaj.com/posts/azure-iac-devops-series-deploy/)
@@ -170,12 +204,17 @@ jobs:
 {% endraw %}
 ```
 
-To demonstrate this, I’ve added a complete example to the repository linked below.
+To demonstrate this, I’ve added a complete example to the repository linked
+below.
 
-Moving forward, this repository will serve as the central hub for all the code featured in this series, providing a cohesive and practical resource for our AI and DevOps journey.
+Moving forward, this repository will serve as the central hub for all the code
+featured in this series, providing a cohesive and practical resource for our AI
+and DevOps journey.
 
 [Click here to view an example of managing AI models using Azure Bicep and GitHub Actions](https://github.com/tw3lveparsecs/devops-and-ai/tree/main/manage-ai-models)
 
 ## Next in the Series
 
-In the next post, we'll dive deeper into testing, validation and integrating AI into your DevOps processes. Stay tuned for more insights on how AI and DevOps can transform your digital landscape!
+In the next post, we'll dive deeper into testing, validation and integrating AI
+into your DevOps processes. Stay tuned for more insights on how AI and DevOps
+can transform your digital landscape!

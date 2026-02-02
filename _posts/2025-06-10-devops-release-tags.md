@@ -1,29 +1,38 @@
 ---
 layout: post
-title: "DevOps: Automating Release Tags"
+title: 'DevOps: Automating Release Tags'
 date: 2025-06-10 06:00:00 +1100
 categories: [DevOps]
 tags: [devops, release, tags, automation]
 image: assets/images/posts/2025-06-10-devops-release-tags/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-Recently, I was tasked with developing a consistent strategy for managing releases and tags in a GitHub repository that had grown organically without any version tracking system. The repository had been accumulating features and fixes for months, but there was no way to track versions, identify what changes belonged to which release, or even determine what was the current deployed "version".
+Recently, I was tasked with developing a consistent strategy for managing
+releases and tags in a GitHub repository that had grown organically without any
+version tracking system. The repository had been accumulating features and fixes
+for months, but there was no way to track versions, identify what changes
+belonged to which release, or even determine what was the current deployed
+"version".
 
 ## The Challenge
 
 In our project, we wanted to:
 
-- Create clear versioned tags that followed semantic versioning (v1.0.0, v1.1.0, etc.)
-- Automatically generate GitHub Releases from these tags, with proper release notes
+- Create clear versioned tags that followed semantic versioning (v1.0.0, v1.1.0,
+  etc.)
+- Automatically generate GitHub Releases from these tags, with proper release
+  notes
 - Avoid manual tagging or release creation
 - Include a flexible way to bump major versions
 
 ## The Solution
 
-To achieve this, a GitHub Actions Workflow was implemented to handle tagging, and release management seamlessly. Illustrated below is the flow of the automated release process:
+To achieve this, a GitHub Actions Workflow was implemented to handle tagging,
+and release management seamlessly. Illustrated below is the flow of the
+automated release process:
 
 ```mermaid
 flowchart TD
@@ -46,24 +55,31 @@ flowchart TD
 
 #### 🔄 **Automated Trigger**
 
-- **Push to Main**: Automatically runs after a pull request has been merged to the main branch
+- **Push to Main**: Automatically runs after a pull request has been merged to
+  the main branch
 
 ### 🎯 **Versioning Logic**
 
-- **SemVer Compliant**: Follows semantic versioning principles and creates tag 1.0.0 if no previous tags exist
-- **Tagging**: Reads the latest Git tag and increments the version, typically a minor bump but can also bump major or patch depending on context.
+- **SemVer Compliant**: Follows semantic versioning principles and creates tag
+  1.0.0 if no previous tags exist
+- **Tagging**: Reads the latest Git tag and increments the version, typically a
+  minor bump but can also bump major or patch depending on context.
 
 ### 🏷️ **Flexible Major Version Bumping**
 
 - **Labels**: Bumps the major version if pull request includes a major label
-- **PR Title/Description**: Bumps the major version if the PR title or description contains `[major]`
-- **Commit Message**: Bumps the major version if a commit message includes `[major]`
+- **PR Title/Description**: Bumps the major version if the PR title or
+  description contains `[major]`
+- **Commit Message**: Bumps the major version if a commit message includes
+  `[major]`
 
 ### 📜 **Release Notes Generation**
 
-- **Changelog**: It auto-generates changelog content for a GitHub Release based on the PR title and description
+- **Changelog**: It auto-generates changelog content for a GitHub Release based
+  on the PR title and description
 
-Here's the GitHub Action that was developed to automate our entire release process:
+Here's the GitHub Action that was developed to automate our entire release
+process:
 
 ```yaml
 {% raw %}
@@ -193,6 +209,9 @@ jobs:
 
 ## Conclusion
 
-The beauty of this solution lies in its simplicity and reliability. Once set up, it runs invisibly in the background, ensuring that every meaningful change to our codebase gets properly versioned, tagged, and documented.
+The beauty of this solution lies in its simplicity and reliability. Once set up,
+it runs invisibly in the background, ensuring that every meaningful change to
+our codebase gets properly versioned, tagged, and documented.
 
-Have you implemented automated release management in your projects? I'd love to hear about your experiences and any creative variations you've developed!
+Have you implemented automated release management in your projects? I'd love to
+hear about your experiences and any creative variations you've developed!

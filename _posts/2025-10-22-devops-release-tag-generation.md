@@ -1,48 +1,73 @@
 ---
 layout: post
-title: "DevOps: Enhanced Release Automation with GitHub's AI-Powered Release Notes"
+title:
+  "DevOps: Enhanced Release Automation with GitHub's AI-Powered Release Notes"
 date: 2025-10-22 06:00:00 +1100
 categories: [DevOps]
 tags: [devops, release, tags, automation, api]
 image: assets/images/posts/2025-10-22-devops-release-tag-generation/feature_image.png
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-In my previous article, "[DevOps: Automating Release Tags](https://azurewithaj.com/posts/devops-release-tags/)", I shared how we automated version tagging and release creation using GitHub Actions. While that solution worked well, the release notes generation was basic, essentially just copying the PR title and description. Today, I'll show you how we evolved this approach by leveraging GitHub's powerful automatic release notes generation API.
+In my previous article,
+"[DevOps: Automating Release Tags](https://azurewithaj.com/posts/devops-release-tags/)",
+I shared how we automated version tagging and release creation using GitHub
+Actions. While that solution worked well, the release notes generation was
+basic, essentially just copying the PR title and description. Today, I'll show
+you how we evolved this approach by leveraging GitHub's powerful automatic
+release notes generation API.
 
 ## The Evolution: From Basic to Intelligent Release Notes
 
-Our original workflow created releases with simple summaries, but we wanted something more comprehensive and professional. We envisioned release notes that would include:
+Our original workflow created releases with simple summaries, but we wanted
+something more comprehensive and professional. We envisioned release notes that
+would include:
 
-- **Comprehensive Release Overview**: A clear summary of what's included in the release
-- **Merged Pull Requests**: A complete list of all PRs that contributed to the release
-- **Contributor Recognition**: Acknowledgement of all team members who contributed to this release
-- **Complete Changelog**: A full, detailed changelog showing every change with proper attribution and links
+- **Comprehensive Release Overview**: A clear summary of what's included in the
+  release
+- **Merged Pull Requests**: A complete list of all PRs that contributed to the
+  release
+- **Contributor Recognition**: Acknowledgement of all team members who
+  contributed to this release
+- **Complete Changelog**: A full, detailed changelog showing every change with
+  proper attribution and links
 
-GitHub provides a powerful API that generates release notes automatically based on pull requests, labels, and commit history. This seemed like the perfect solution, but how do we integrate it effectively into our existing automation workflow?
+GitHub provides a powerful API that generates release notes automatically based
+on pull requests, labels, and commit history. This seemed like the perfect
+solution, but how do we integrate it effectively into our existing automation
+workflow?
 
 ## Leveraging the GitHub API for Release Notes Generation
 
 ### Understanding the GitHub Release Notes API
 
-The GitHub API provides a dedicated endpoint for generating release notes: `/repos/{owner}/{repo}/releases/generate-notes`. This endpoint is intelligent. It analyses all changes between two tags, extracts contributors, and formats everything into a polished markdown changelog.
+The GitHub API provides a dedicated endpoint for generating release notes:
+`/repos/{owner}/{repo}/releases/generate-notes`. This endpoint is intelligent.
+It analyses all changes between two tags, extracts contributors, and formats
+everything into a polished markdown changelog.
 
 **Key API Parameters:**
 
 - `tag_name`: The tag for which you're generating release notes (required)
-- `previous_tag_name`: The tag to compare against (optional, but essential for meaningful changelogs)
-- `target_commitish`: The target branch or commit (defaults to the repository's default branch)
+- `previous_tag_name`: The tag to compare against (optional, but essential for
+  meaningful changelogs)
+- `target_commitish`: The target branch or commit (defaults to the repository's
+  default branch)
 
 ### Integration Strategy
 
-Rather than making shell calls with `curl`, I discovered that using GitHub's JavaScript API client within `actions/github-script@v7` provided a cleaner, more reliable approach. This eliminated the need for complex JSON manipulation with `jq` and provided better error handling.
+Rather than making shell calls with `curl`, I discovered that using GitHub's
+JavaScript API client within `actions/github-script@v7` provided a cleaner, more
+reliable approach. This eliminated the need for complex JSON manipulation with
+`jq` and provided better error handling.
 
 Here's how the integration works:
 
 **Step 1: Fetch Latest Tag**
 
-First, we need to identify the latest tag to compare against our new tagged release:
+First, we need to identify the latest tag to compare against our new tagged
+release:
 
 ```yaml
 {% raw %}
@@ -55,7 +80,9 @@ First, we need to identify the latest tag to compare against our new tagged rele
 {% endraw %}
 ```
 
-This step is crucial, it gives the API the context it needs to generate a meaningful changelog comparing the latest tagged version with our new tagged release.
+This step is crucial, it gives the API the context it needs to generate a
+meaningful changelog comparing the latest tagged version with our new tagged
+release.
 
 **Step 2: Tag our New Release**
 
@@ -84,7 +111,8 @@ This step is crucial, it gives the API the context it needs to generate a meanin
 {% endraw %}
 ```
 
-This step creates the new tag for our release based on whether it's a major or minor release.
+This step creates the new tag for our release based on whether it's a major or
+minor release.
 
 **Step 3: Call the GitHub API with JavaScript**
 
@@ -143,13 +171,17 @@ This step creates the new tag for our release based on whether it's a major or m
 {% endraw %}
 ```
 
-This step uses the GitHub API to generate the release notes and writes the final notes to a file for the release creation step.
+This step uses the GitHub API to generate the release notes and writes the final
+notes to a file for the release creation step.
 
 **Key Benefits of This Approach:**
 
-1. **Automatic Context Awareness**: GitHub's API analyses commit history, PR titles, and labels to categorise changes intelligently
-2. **Built-in Contributor Detection**: The API automatically identifies and credits all contributors
-3. **No Manual Parsing**: Unlike shell-based approaches, we don't need complex regex or JSON parsing
+1. **Automatic Context Awareness**: GitHub's API analyses commit history, PR
+   titles, and labels to categorise changes intelligently
+2. **Built-in Contributor Detection**: The API automatically identifies and
+   credits all contributors
+3. **No Manual Parsing**: Unlike shell-based approaches, we don't need complex
+   regex or JSON parsing
 
 ### Handling Edge Cases
 
@@ -161,17 +193,19 @@ The implementation accounts for several edge cases:
 previous_tag_name: latestTag || undefined;
 ```
 
-When `latestTag` is undefined (first release), the API generates notes for all commits in the repository, which is appropriate for initial releases.
+When `latestTag` is undefined (first release), the API generates notes for all
+commits in the repository, which is appropriate for initial releases.
 
-**2. No Changes Between Tags**
-The API gracefully handles scenarios where tags are identical or when no PRs exist between versions.
+**2. No Changes Between Tags** The API gracefully handles scenarios where tags
+are identical or when no PRs exist between versions.
 
-**3. Missing PR Metadata**
-If PRs lack proper labels or descriptions, the API uses commit messages and titles as fallbacks.
+**3. Missing PR Metadata** If PRs lack proper labels or descriptions, the API
+uses commit messages and titles as fallbacks.
 
 ## The Complete Enhanced Workflow
 
-Here's the complete GitHub Actions workflow that combines automated tagging with intelligent release notes:
+Here's the complete GitHub Actions workflow that combines automated tagging with
+intelligent release notes:
 
 ```yaml
 {% raw %}
@@ -369,7 +403,8 @@ The workflow handles edge cases:
 
 ## Conclusion
 
-By combining GitHub's automatic release notes API with our existing automated tagging workflow, we've created a powerful, hands-off release management system.
+By combining GitHub's automatic release notes API with our existing automated
+tagging workflow, we've created a powerful, hands-off release management system.
 
 The result is a system that:
 
@@ -381,6 +416,8 @@ The result is a system that:
 
 [Click here to view a working example of the complete workflow on GitHub.](https://github.com/tw3lveparsecs/azure-iac-and-devops/tree/main/.github/workflows/tags-and-release.yml)
 
-If you're still manually creating release notes, I highly recommend implementing this approach.
+If you're still manually creating release notes, I highly recommend implementing
+this approach.
 
-Have you implemented automated release notes in your projects? What challenges did you face? Share your experiences in the comments below!
+Have you implemented automated release notes in your projects? What challenges
+did you face? Share your experiences in the comments below!

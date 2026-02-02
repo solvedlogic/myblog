@@ -1,22 +1,29 @@
 ---
 layout: post
-title: "GitHub Copilot DevOps Excellence: Prompt Files vs Instructions vs Chat Modes"
+title:
+  'GitHub Copilot DevOps Excellence: Prompt Files vs Instructions vs Chat Modes'
 date: 2025-07-17 09:00:00 +1100
 categories: [DevOps, AI]
 tags: [github, copilot, devops, ai]
 image: assets/images/posts/2025-07-17-github-copilot-prompt-instructions-chatmodes/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-As we venture deeper into 2025, GitHub Copilot has evolved far beyond a simple code completion tool. The introduction of **prompt files**, **custom instructions**, and **custom chat modes** has transformed it into a sophisticated AI development partner. Yet, we may find ourselves confused about when and how to leverage these features effectively.
+As we venture deeper into 2025, GitHub Copilot has evolved far beyond a simple
+code completion tool. The introduction of **prompt files**, **custom
+instructions**, and **custom chat modes** has transformed it into a
+sophisticated AI development partner. Yet, we may find ourselves confused about
+when and how to leverage these features effectively.
 
-In this comprehensive guide, we'll demystify these powerful capabilities and provide clear guidance on maximising value in your DevOps workflows.
+In this comprehensive guide, we'll demystify these powerful capabilities and
+provide clear guidance on maximising value in your DevOps workflows.
 
 ## The Copilot Feature Hierarchy
 
-Before diving into specific features, let's establish a clear mental model of GitHub Copilot's capabilities:
+Before diving into specific features, let's establish a clear mental model of
+GitHub Copilot's capabilities:
 
 ```mermaid
 graph LR
@@ -45,13 +52,18 @@ graph LR
 
 ### What Are Prompt Files?
 
-Prompt files serve as standalone instructions for common tasks. They describe **what should be done** with optional task-specific guidelines about how the task should be performed. Think of them as specialised AI assistants for particular workflows like generating code, performing code reviews, or creating implementation plans.
+Prompt files serve as standalone instructions for common tasks. They describe
+**what should be done** with optional task-specific guidelines about how the
+task should be performed. Think of them as specialised AI assistants for
+particular workflows like generating code, performing code reviews, or creating
+implementation plans.
 
 ### When to Use Prompt Files
 
 **✅ Use prompt files when:**
 
-- You need specific task-focused AI assistance (e.g., "Review this Bicep template")
+- You need specific task-focused AI assistance (e.g., "Review this Bicep
+  template")
 - Creating reusable prompts for common workflows
 - Defining what should be accomplished in a particular scenario
 - Building task-specific AI assistants for your team
@@ -64,21 +76,24 @@ Prompt files serve as standalone instructions for common tasks. They describe **
 
 ### File Storage and Organisation
 
-Prompt files can be stored in your Visual Studio Code workspace in the `.github/prompts/` directory for easy organisation and sharing.
+Prompt files can be stored in your Visual Studio Code workspace in the
+`.github/prompts/` directory for easy organisation and sharing.
 
 ### Example: Azure DevOps Pipeline Security Review
 
-Here's an example prompt file for Azure DevOps pipeline security reviews that would be stored at `.github/prompts/pipeline-security-review.prompt.md`:
+Here's an example prompt file for Azure DevOps pipeline security reviews that
+would be stored at `.github/prompts/pipeline-security-review.prompt.md`:
 
 ```markdown
 ---
-mode: "agent"
-description: "Azure DevOps pipeline security reviews"
+mode: 'agent'
+description: 'Azure DevOps pipeline security reviews'
 ---
 
 # Azure DevOps Pipeline Security Review
 
-You are a DevOps security specialist focused on Azure DevOps pipeline security and compliance.
+You are a DevOps security specialist focused on Azure DevOps pipeline security
+and compliance.
 
 **Primary Security Assessment:**
 
@@ -117,7 +132,8 @@ You are a DevOps security specialist focused on Azure DevOps pipeline security a
 
 ## Focus on actionable recommendations that reduce attack surface while maintaining deployment velocity.
 
-Prioritise findings that could lead to credential exposure, unauthorised access, or supply chain compromise.
+Prioritise findings that could lead to credential exposure, unauthorised access,
+or supply chain compromise.
 ```
 
 ### Benefits of This Approach
@@ -131,35 +147,44 @@ Prioritise findings that could lead to credential exposure, unauthorised access,
 
 ### What are Custom Instructions?
 
-Custom instructions define common guidelines for **how a task should be done** like code generation, reviews, and commit messages should be performed. These are user-specific settings that influence how Copilot approaches work across all repositories and projects.
+Custom instructions define common guidelines for **how a task should be done**
+like code generation, reviews, and commit messages should be performed. These
+are user-specific settings that influence how Copilot approaches work across all
+repositories and projects.
 
 ### Configuration Options
 
 Custom instructions can be configured in several ways:
 
 - **VS Code Settings**: Set personal preferences in your development environment
-- **Repository-specific**: Store in `.github/copilot-instructions.md` for project-wide guidelines
-- **VS Code Workspace**: Store multiple instruction files in `.github/instructions/` directory
+- **Repository-specific**: Store in `.github/copilot-instructions.md` for
+  project-wide guidelines
+- **VS Code Workspace**: Store multiple instruction files in
+  `.github/instructions/` directory
 
 ### Example: Custom Instructions for Azure Infrastructure Deployment
 
 ```markdown
 ---
-description: "Azure Infrastructure Deployment"
-applyTo: "**/*.bicep"
+description: 'Azure Infrastructure Deployment'
+applyTo: '**/*.bicep'
 ---
 
 ## Naming Conventions
 
-- When writing Bicep code, use lowerCamelCase for all names (variables, parameters, resources)
-- Use resource type descriptive symbolic names (e.g., 'storageAccount' not 'storageAccountName')
-- Avoid using 'name' in a symbolic name as it represents the resource, not the resource's name
+- When writing Bicep code, use lowerCamelCase for all names (variables,
+  parameters, resources)
+- Use resource type descriptive symbolic names (e.g., 'storageAccount' not
+  'storageAccountName')
+- Avoid using 'name' in a symbolic name as it represents the resource, not the
+  resource's name
 
 ## Security
 
 - Never hardcode secrets, connection strings, or sensitive configuration values
 - Use Azure Key Vault references for all sensitive data
-- Implement least-privilege access with managed identities over service principals
+- Implement least-privilege access with managed identities over service
+  principals
 - Include network security groups and private endpoints by default
 - Enable diagnostic settings and monitoring for all resources
 
@@ -181,30 +206,38 @@ applyTo: "**/*.bicep"
 
 ### What are Custom Chat Modes?
 
-Custom chat modes allow you to create specialised AI assistants for different scenarios. These can be project-specific, role-specific, or task-specific. Chat modes define how the chat interface operates, which tools it can access, and how it interacts with your codebase.
+Custom chat modes allow you to create specialised AI assistants for different
+scenarios. These can be project-specific, role-specific, or task-specific. Chat
+modes define how the chat interface operates, which tools it can access, and how
+it interacts with your codebase.
 
 ### Storage and Organisation
 
-Chat mode configurations can be stored in your Visual Studio Code workspace in the `.github/chatmodes/` directory for easy organisation and sharing.
+Chat mode configurations can be stored in your Visual Studio Code workspace in
+the `.github/chatmodes/` directory for easy organisation and sharing.
 
 ### Example: Custom Chat Mode for DevOps Security Compliance
 
-Here's a unique chat mode specifically for DevOps security compliance that would be stored at `.github/chatmodes/devops-security-compliance.chatmode.md`:
+Here's a unique chat mode specifically for DevOps security compliance that would
+be stored at `.github/chatmodes/devops-security-compliance.chatmode.md`:
 
 ```markdown
 ---
-description: "DevOps Security Compliance Assistant"
+description: 'DevOps Security Compliance Assistant'
 ---
 
 # DevOps Security Compliance Assistant
 
-You are a specialised DevOps Security Compliance expert focused on helping teams implement and maintain security best practices across their development and deployment pipelines.
+You are a specialised DevOps Security Compliance expert focused on helping teams
+implement and maintain security best practices across their development and
+deployment pipelines.
 
 ## Core Responsibilities
 
 **Security Framework Alignment:**
 
-- Evaluate practices against NIST Cybersecurity Framework, CIS Controls, and OWASP guidelines
+- Evaluate practices against NIST Cybersecurity Framework, CIS Controls, and
+  OWASP guidelines
 - Assess compliance with SOC 2, ISO 27001, PCI DSS, and GDPR requirements
 - Provide gap analysis and remediation roadmaps for security deficiencies
 
@@ -228,7 +261,8 @@ You are a specialised DevOps Security Compliance expert focused on helping teams
 
 1. Identify and categorise security risks by severity (Critical/High/Medium/Low)
 2. Provide clear business impact explanations for each finding
-3. Prioritise recommendations based on threat landscape and compliance requirements
+3. Prioritise recommendations based on threat landscape and compliance
+   requirements
 4. Include implementation timelines and resource requirements
 
 **Compliance Mapping:**
@@ -247,7 +281,8 @@ You are a specialised DevOps Security Compliance expert focused on helping teams
 
 ## Communication Style
 
-- Use clear, non-technical language when explaining security concepts to stakeholders
+- Use clear, non-technical language when explaining security concepts to
+  stakeholders
 - Provide technical implementation details for engineering teams
 - Include cost-benefit analysis for security investments
 - Reference current threat intelligence and industry best practices
@@ -262,7 +297,8 @@ You are a specialised DevOps Security Compliance expert focused on helping teams
 - Security incident response and recovery procedures
 - Continuous compliance monitoring and reporting
 
-Always provide practical, implementable recommendations that balance security requirements with operational efficiency and development velocity.
+Always provide practical, implementable recommendations that balance security
+requirements with operational efficiency and development velocity.
 ```
 
 ## Decision Matrix: When to Use What
@@ -328,11 +364,13 @@ Track these metrics to validate your Copilot optimisation:
 └── src/
 ```
 
-**Repository-wide Instructions**: Use `.github/copilot-instructions.md` for project-specific guidelines that apply to all team members.
+**Repository-wide Instructions**: Use `.github/copilot-instructions.md` for
+project-specific guidelines that apply to all team members.
 
 ## Advanced Techniques
 
-Here are some advanced techniques to maximise the effectiveness of GitHub Copilot in your DevOps workflows:
+Here are some advanced techniques to maximise the effectiveness of GitHub
+Copilot in your DevOps workflows:
 
 ### Context Layering Strategy
 
@@ -371,7 +409,10 @@ Use different chat modes for different phases of development:
 
 ## Conclusion
 
-GitHub Copilot's prompt files, custom instructions, and custom chat modes represent a paradigm shift in AI-assisted development. When implemented strategically, these features transform your DevOps workflows from reactive problem-solving to proactive, intelligent automation.
+GitHub Copilot's prompt files, custom instructions, and custom chat modes
+represent a paradigm shift in AI-assisted development. When implemented
+strategically, these features transform your DevOps workflows from reactive
+problem-solving to proactive, intelligent automation.
 
 ### Key Takeaways
 
@@ -384,7 +425,8 @@ GitHub Copilot's prompt files, custom instructions, and custom chat modes repres
 **Implementation Approach:**
 
 1. Start with your biggest pain points and highest-impact scenarios
-2. Measure effectiveness through concrete metrics (review time, compliance violations, velocity)
+2. Measure effectiveness through concrete metrics (review time, compliance
+   violations, velocity)
 3. Gradually expand AI-assisted capabilities based on proven value
 
 **Success Factors:**
@@ -395,6 +437,12 @@ GitHub Copilot's prompt files, custom instructions, and custom chat modes repres
 
 ### Next Steps
 
-Ready to put these concepts into practice? The [GitHub Awesome Copilot repository](https://github.com/github/awesome-copilot) provides a curated collection of real-world examples, templates, and working implementations that you can adapt for your own projects. From enterprise-grade prompt files to specialised chat modes, this repository serves as a practical reference library for implementing these strategies in production environments.
+Ready to put these concepts into practice? The
+[GitHub Awesome Copilot repository](https://github.com/github/awesome-copilot)
+provides a curated collection of real-world examples, templates, and working
+implementations that you can adapt for your own projects. From enterprise-grade
+prompt files to specialised chat modes, this repository serves as a practical
+reference library for implementing these strategies in production environments.
 
-_Have you implemented advanced Copilot features in your DevOps workflows? Share your experiences and lessons learned in the comments below._
+_Have you implemented advanced Copilot features in your DevOps workflows? Share
+your experiences and lessons learned in the comments below._

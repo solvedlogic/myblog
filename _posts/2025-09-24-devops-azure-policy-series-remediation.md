@@ -1,32 +1,48 @@
 ---
 layout: post
-title: "DevOps and Azure Policy Series: Remediation Tasks"
+title: 'DevOps and Azure Policy Series: Remediation Tasks'
 date: 2025-09-24 06:00:00 +1100
 categories: [Azure Policy, DevOps]
 tags: [azure, remediation, iac, policy, ci/cd, devops]
 image: assets/images/posts/2025-09-24-devops-azure-policy-series-remediation/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-Welcome to the fourth instalment of our DevOps and Azure Policy series! In our [previous post](https://azurewithaj.com/posts/devops-azure-policy-series-exemptions/), we explored how to manage policy exemptions using Infrastructure as Code (IaC) and CI/CD pipelines. Today, we're diving into another critical aspect of Azure Policy governance: **policy remediation tasks**.
+Welcome to the fourth instalment of our DevOps and Azure Policy series! In our
+[previous post](https://azurewithaj.com/posts/devops-azure-policy-series-exemptions/),
+we explored how to manage policy exemptions using Infrastructure as Code (IaC)
+and CI/CD pipelines. Today, we're diving into another critical aspect of Azure
+Policy governance: **policy remediation tasks**.
 
-While exemptions help us handle exceptions to policies, remediation tasks take the opposite approach they actively fix non-compliant resources to bring them into alignment with our organisational standards. We'll explore what remediation tasks are, when to use them, and how to implement them through automated PowerShell scripts and CI/CD pipelines.
+While exemptions help us handle exceptions to policies, remediation tasks take
+the opposite approach they actively fix non-compliant resources to bring them
+into alignment with our organisational standards. We'll explore what remediation
+tasks are, when to use them, and how to implement them through automated
+PowerShell scripts and CI/CD pipelines.
 
 ## Understanding Azure Policy Remediation
 
-Policy remediation is the process of automatically correcting non-compliant resources to ensure they adhere to our defined policies. Think of it as the "auto-fix" capability for our governance rules. When Azure Policy identifies resources that don't meet our standards, remediation tasks can automatically apply the necessary changes to bring them into compliance.
+Policy remediation is the process of automatically correcting non-compliant
+resources to ensure they adhere to our defined policies. Think of it as the
+"auto-fix" capability for our governance rules. When Azure Policy identifies
+resources that don't meet our standards, remediation tasks can automatically
+apply the necessary changes to bring them into compliance.
 
 ### How Policy Remediation Works
 
 The remediation process follows this workflow:
 
-1. **Policy Evaluation**: Azure Policy continuously evaluates resources against assigned policies
+1. **Policy Evaluation**: Azure Policy continuously evaluates resources against
+   assigned policies
 2. **Compliance Assessment**: Resources are marked as compliant or non-compliant
-3. **Remediation Task Creation**: You create a remediation task for a specific policy assignment
-4. **Resource Discovery**: Azure identifies all non-compliant resources within the scope
-5. **Automatic Correction**: The remediation task applies the necessary changes to fix non-compliant resources
+3. **Remediation Task Creation**: You create a remediation task for a specific
+   policy assignment
+4. **Resource Discovery**: Azure identifies all non-compliant resources within
+   the scope
+5. **Automatic Correction**: The remediation task applies the necessary changes
+   to fix non-compliant resources
 
 ### Types of Remediation
 
@@ -41,19 +57,26 @@ Azure Policy supports two main types of remediation:
 
 Remediation tasks are particularly valuable in these scenarios:
 
-1. **Tag Governance**: Automatically applying missing mandatory tags to resources
-2. **Security Baseline**: Enabling required security features like encryption or monitoring
-3. **Cost Optimisation**: Implementing cost-saving configurations across resources
+1. **Tag Governance**: Automatically applying missing mandatory tags to
+   resources
+2. **Security Baseline**: Enabling required security features like encryption or
+   monitoring
+3. **Cost Optimisation**: Implementing cost-saving configurations across
+   resources
 4. **Compliance Enforcement**: Ensuring resources meet regulatory requirements
 5. **Operational Standards**: Applying consistent operational configurations
 
 ## Limitations and Considerations
 
-Before implementing remediation tasks, it's important to understand their current limitations:
+Before implementing remediation tasks, it's important to understand their
+current limitations:
 
 ### Bicep Support Limitation
 
-At the time of writing, **policy remediation tasks are not currently supported for deployment via Azure Bicep**. This means that while you can define and assign policies using Bicep, the remediation tasks themselves must be managed through other means such as:
+At the time of writing, **policy remediation tasks are not currently supported
+for deployment via Azure Bicep**. This means that while you can define and
+assign policies using Bicep, the remediation tasks themselves must be managed
+through other means such as:
 
 - Azure Portal
 - Azure CLI
@@ -74,12 +97,16 @@ Remediation tasks can be created at different scopes:
 
 Azure Policy offers two resource discovery modes for remediation:
 
-- **ExistingNonCompliant**: Only remediate resources that are currently non-compliant
-- **ReEvaluateCompliance**: Re-evaluate all resources and remediate any that become non-compliant
+- **ExistingNonCompliant**: Only remediate resources that are currently
+  non-compliant
+- **ReEvaluateCompliance**: Re-evaluate all resources and remediate any that
+  become non-compliant
 
 ## Implementing Remediation with PowerShell
 
-Let's examine a PowerShell script that automates the creation and execution of policy remediation tasks. This script provides a standardised approach to managing remediation across your Azure environment.
+Let's examine a PowerShell script that automates the creation and execution of
+policy remediation tasks. This script provides a standardised approach to
+managing remediation across your Azure environment.
 
 ### The Core Remediation Script
 
@@ -139,7 +166,8 @@ process {
 
 ### Key Script Features
 
-**Dynamic Naming**: Each remediation task gets a unique name with a timestamp to avoid conflicts:
+**Dynamic Naming**: Each remediation task gets a unique name with a timestamp to
+avoid conflicts:
 
 ```powershell
 Name = ($remediation.name + " - " + (Get-Date -Format "yyyyMMddHHmmss"))
@@ -147,11 +175,13 @@ Name = ($remediation.name + " - " + (Get-Date -Format "yyyyMMddHHmmss"))
 
 **Scope Flexibility**: The script handles different remediation scopes:
 
-**Error Handling**: Comprehensive error handling ensures failed remediation tasks don't break the entire process.
+**Error Handling**: Comprehensive error handling ensures failed remediation
+tasks don't break the entire process.
 
 ## Configuration Management
 
-The script uses a JSON configuration file to define which policies to remediate. This approach provides several benefits:
+The script uses a JSON configuration file to define which policies to remediate.
+This approach provides several benefits:
 
 ### Configuration Structure
 
@@ -208,7 +238,8 @@ The script uses a JSON configuration file to define which policies to remediate.
 
 ### CI/CD Pipeline Integration
 
-While we can't use Bicep for remediation tasks, we can still integrate them into our DevOps workflows using PowerShell and CI/CD pipelines.
+While we can't use Bicep for remediation tasks, we can still integrate them into
+our DevOps workflows using PowerShell and CI/CD pipelines.
 
 ```yaml
 # Example GitHub Actions workflow for policy remediation
@@ -218,9 +249,10 @@ on:
   workflow_dispatch:
     inputs:
       remediation_scope:
-        description: "Remediation scope (management-group, subscription, resource-group)"
+        description:
+          'Remediation scope (management-group, subscription, resource-group)'
         required: true
-        default: "subscription"
+        default: 'subscription'
         type: choice
         options:
           - management-group
@@ -261,7 +293,8 @@ jobs:
 
 **2. Scope Appropriately**
 
-- Start with narrow scopes (resource groups) before expanding to subscriptions or management groups
+- Start with narrow scopes (resource groups) before expanding to subscriptions
+  or management groups
 - Use management group level remediation only for well-tested, low-risk policies
 
 **3. Configuration Management**
@@ -278,7 +311,8 @@ jobs:
 
 ## Governance Workflow for Remediation
 
-Implementing a structured workflow ensures remediation tasks are executed safely and effectively:
+Implementing a structured workflow ensures remediation tasks are executed safely
+and effectively:
 
 ```mermaid
 graph TD
@@ -331,21 +365,35 @@ graph TD
 
 ## Complete Example
 
-The PowerShell script, JSON configuration, and CI/CD pipeline integration we've explored provide a comprehensive solution for automated policy remediation. To help you implement this approach in your own environment, I've created a complete working example:
+The PowerShell script, JSON configuration, and CI/CD pipeline integration we've
+explored provide a comprehensive solution for automated policy remediation. To
+help you implement this approach in your own environment, I've created a
+complete working example:
 
 [Click here to view the policy remediation example](https://github.com/tw3lveparsecs/azure-policy-with-bicep/tree/main/policy-remediation)
 
 ## Conclusion
 
-Policy remediation tasks provide automated compliance enforcement for Azure environments, ensuring non-compliant resources are automatically corrected rather than simply identified. While Bicep support isn't available yet, PowerShell-based remediation workflows integrated with CI/CD pipelines offer a robust governance solution.
+Policy remediation tasks provide automated compliance enforcement for Azure
+environments, ensuring non-compliant resources are automatically corrected
+rather than simply identified. While Bicep support isn't available yet,
+PowerShell-based remediation workflows integrated with CI/CD pipelines offer a
+robust governance solution.
 
 This approach offers several advantages:
 
-1. **Automated Compliance**: Non-compliant resources are fixed automatically without manual intervention
-2. **Scalable Governance**: Apply consistent standards across large Azure environments through configuration-driven remediation
-3. **Risk Management**: Structured workflows ensure appropriate oversight while enabling automation for low-risk changes
-4. **DevOps Integration**: JSON configuration and PowerShell scripts integrate seamlessly with modern CI/CD practices
+1. **Automated Compliance**: Non-compliant resources are fixed automatically
+   without manual intervention
+2. **Scalable Governance**: Apply consistent standards across large Azure
+   environments through configuration-driven remediation
+3. **Risk Management**: Structured workflows ensure appropriate oversight while
+   enabling automation for low-risk changes
+4. **DevOps Integration**: JSON configuration and PowerShell scripts integrate
+   seamlessly with modern CI/CD practices
 
-The combination of automated remediation with policy exemptions creates a comprehensive governance framework that balances compliance requirements with operational flexibility.
+The combination of automated remediation with policy exemptions creates a
+comprehensive governance framework that balances compliance requirements with
+operational flexibility.
 
-In our next article, we'll continue exploring advanced Azure Policy scenarios. Stay tuned!
+In our next article, we'll continue exploring advanced Azure Policy scenarios.
+Stay tuned!

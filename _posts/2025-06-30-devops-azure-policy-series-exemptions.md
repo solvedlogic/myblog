@@ -1,30 +1,44 @@
 ---
 layout: post
-title: "DevOps and Azure Policy Series: Exemptions"
+title: 'DevOps and Azure Policy Series: Exemptions'
 date: 2025-06-30 05:00:00 +1100
 categories: [Azure Policy, Bicep]
 tags: [azure, bicep, iac, policy, ci/cd, devops]
 image: assets/images/posts/2025-06-30-devops-azure-policy-series-exemptions/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-Welcome to the third instalment of our DevOps and Azure Policy series! In our [previous post](https://azurewithaj.com/posts/devops-azure-policy-series-custom-policies/), we explored how to create and deploy custom policy definitions using Bicep and CI/CD pipelines. Today, we're diving into a critical but often overlooked aspect of Azure Policy governance: policy exemptions. We'll explore what they are, when to use them, and how to implement them through Infrastructure as Code (IaC) using Bicep and automated CI/CD pipelines.
+Welcome to the third instalment of our DevOps and Azure Policy series! In our
+[previous post](https://azurewithaj.com/posts/devops-azure-policy-series-custom-policies/),
+we explored how to create and deploy custom policy definitions using Bicep and
+CI/CD pipelines. Today, we're diving into a critical but often overlooked aspect
+of Azure Policy governance: policy exemptions. We'll explore what they are, when
+to use them, and how to implement them through Infrastructure as Code (IaC)
+using Bicep and automated CI/CD pipelines.
 
 ## Understanding Azure Policy Exemptions
 
-Policy exemptions provide a controlled mechanism to exclude specific resources from policy evaluation. While this might seem counterintuitive to governance principles, there are legitimate scenarios where temporary or permanent exemptions are necessary for business continuity and operational flexibility.
+Policy exemptions provide a controlled mechanism to exclude specific resources
+from policy evaluation. While this might seem counterintuitive to governance
+principles, there are legitimate scenarios where temporary or permanent
+exemptions are necessary for business continuity and operational flexibility.
 
 ### Why Policy Exemptions Are Necessary
 
 Consider these real-world scenarios where exemptions become essential:
 
-1. **Legacy Systems**: Older applications that cannot be immediately updated to meet current compliance standards
-2. **Emergency Deployments**: Critical business systems that need immediate deployment before full compliance review
-3. **Testing Environments**: Development resources that require different governance rules than production
-4. **Vendor Limitations**: Third-party solutions with specific configuration requirements that conflict with organisational policies
-5. **Phased Compliance**: Gradual roll out of new governance requirements across large organisations
+1. **Legacy Systems**: Older applications that cannot be immediately updated to
+   meet current compliance standards
+2. **Emergency Deployments**: Critical business systems that need immediate
+   deployment before full compliance review
+3. **Testing Environments**: Development resources that require different
+   governance rules than production
+4. **Vendor Limitations**: Third-party solutions with specific configuration
+   requirements that conflict with organisational policies
+5. **Phased Compliance**: Gradual roll out of new governance requirements across
+   large organisations
 
 ### Types of Policy Exemptions
 
@@ -43,8 +57,10 @@ graph TD
     style C fill:#d1ecf1,stroke:#0c5460,stroke-width:2px,color:#0c5460
 ```
 
-- **Waiver**: Complete exemption from policy evaluation where the resource is not evaluated against the policy at all
-- **Mitigated**: Acknowledges that compliance is achieved through alternative means not detectable by the policy
+- **Waiver**: Complete exemption from policy evaluation where the resource is
+  not evaluated against the policy at all
+- **Mitigated**: Acknowledges that compliance is achieved through alternative
+  means not detectable by the policy
 
 ## Anatomy of a Policy Exemption
 
@@ -79,16 +95,20 @@ Key components of a policy exemption:
 - **exemptionCategory**: Either "Waiver" or "Mitigated"
 - **expiresOn**: Optional expiration date for time-bound exemptions
 - **policyAssignmentId**: The policy assignment being exempted from
-- **policyDefinitionReferenceIds**: Specific policies within an initiative (optional)
+- **policyDefinitionReferenceIds**: Specific policies within an initiative
+  (optional)
 - **metadata**: Additional context for governance and audit purposes
 
 ## Creating Policy Exemptions with Bicep
 
-Now let's implement policy exemptions using Bicep. We can create policy exemptions at the management group, subscription, resource group or resource level.
+Now let's implement policy exemptions using Bicep. We can create policy
+exemptions at the management group, subscription, resource group or resource
+level.
 
 ### Management Group Level Exemption
 
-In this example, we'll focus on management group level exemptions, which are commonly used for broad governance scenarios.
+In this example, we'll focus on management group level exemptions, which are
+commonly used for broad governance scenarios.
 
 ```bicep
 // policy-exemption-mg.bicep
@@ -150,9 +170,14 @@ param exemptions = [
 
 ### Resource Level Exemption
 
-For resource-level exemptions, we need to take a different approach. Azure Bicep doesn't natively support creating policy exemptions at the individual resource level, so we'll leverage deployment scripts to achieve this functionality.
+For resource-level exemptions, we need to take a different approach. Azure Bicep
+doesn't natively support creating policy exemptions at the individual resource
+level, so we'll leverage deployment scripts to achieve this functionality.
 
-Here is an example of how to create a resource-level exemption using a deployment script. It involves creating a Bicep module that uses the `Microsoft.Resources/deploymentScripts` resource type to execute a script that creates the exemption.
+Here is an example of how to create a resource-level exemption using a
+deployment script. It involves creating a Bicep module that uses the
+`Microsoft.Resources/deploymentScripts` resource type to execute a script that
+creates the exemption.
 
 Here is the Bicep module for creating a policy exemption at the resource level:
 
@@ -292,7 +317,8 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-Now let's create a template that leverages this module to deploy resource-level exemptions:
+Now let's create a template that leverages this module to deploy resource-level
+exemptions:
 
 ```bicep
 // policy-exemption-resource.bicep
@@ -414,7 +440,9 @@ param exemptions = [
 
 ## Governance Workflow for Policy Exemptions
 
-Implementing a robust governance workflow is crucial for maintaining security and compliance while providing necessary flexibility. Here's an example workflow:
+Implementing a robust governance workflow is crucial for maintaining security
+and compliance while providing necessary flexibility. Here's an example
+workflow:
 
 ```mermaid
 flowchart TD
@@ -448,7 +476,8 @@ flowchart TD
 
 ## CI/CD Pipeline for Policy Exemptions
 
-Let's implement a CI/CD pipeline using GitHub Actions for managing policy exemptions using our centralised pipeline approach:
+Let's implement a CI/CD pipeline using GitHub Actions for managing policy
+exemptions using our centralised pipeline approach:
 
 ```yaml
 {% raw %}
@@ -528,22 +557,34 @@ jobs:
 {% endraw %}
 ```
 
-To demonstrate this, I’ve added a complete example to the repository linked below.
+To demonstrate this, I’ve added a complete example to the repository linked
+below.
 
 [Click here to view an example of a policy exemption using Bicep](https://github.com/tw3lveparsecs/azure-policy-with-bicep/tree/main/policy-exemptions)
 
 ## Conclusion
 
-Policy exemptions are a powerful tool for maintaining governance flexibility while ensuring compliance. When implemented correctly with proper CI/CD pipelines, approval workflows, and monitoring, they provide a controlled mechanism for handling legitimate exceptions to organisational policies.
+Policy exemptions are a powerful tool for maintaining governance flexibility
+while ensuring compliance. When implemented correctly with proper CI/CD
+pipelines, approval workflows, and monitoring, they provide a controlled
+mechanism for handling legitimate exceptions to organisational policies.
 
 Key takeaways from this article:
 
-1. **Strategic Use**: Exemptions should be used judiciously and only when absolutely necessary
+1. **Strategic Use**: Exemptions should be used judiciously and only when
+   absolutely necessary
 2. **Time-Bounded**: Implement expiration dates and regular review cycles
-3. **Comprehensive Documentation**: Maintain detailed records of business justification and approval
-4. **Automated Governance**: Use CI/CD pipelines and monitoring to ensure consistent processes
-5. **Regular Auditing**: Implement reporting and alerting for exemption lifecycle management
+3. **Comprehensive Documentation**: Maintain detailed records of business
+   justification and approval
+4. **Automated Governance**: Use CI/CD pipelines and monitoring to ensure
+   consistent processes
+5. **Regular Auditing**: Implement reporting and alerting for exemption
+   lifecycle management
 
-By following these practices and leveraging the Bicep templates and CI/CD patterns demonstrated in this article, we can implement a robust policy exemption management system that balances governance requirements with operational flexibility.
+By following these practices and leveraging the Bicep templates and CI/CD
+patterns demonstrated in this article, we can implement a robust policy
+exemption management system that balances governance requirements with
+operational flexibility.
 
-In our next article, we'll explore advanced Azure Policy scenarios including policy remediation. Stay tuned!
+In our next article, we'll explore advanced Azure Policy scenarios including
+policy remediation. Stay tuned!

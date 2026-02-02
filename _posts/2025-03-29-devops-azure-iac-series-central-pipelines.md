@@ -1,22 +1,32 @@
 ---
 layout: post
-title: "DevOps and Azure IaC Series: Centralised Pipelines"
+title: 'DevOps and Azure IaC Series: Centralised Pipelines'
 date: 2025-03-29 21:30:00 +1100
 categories: [DevOps, Azure IaC]
 tags: [azure, pipelines, devops, iac, ci/cd]
 image: assets/images/posts/2025-03-29-devops-iac-series-central-pipelines/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
 ## DevOps and Azure IaC Series: Centralised Pipelines
 
-Welcome back to our DevOps and Azure IaC series! In our previous article, we delved into the Deploy phase, exploring effective approaches for deploying infrastructure using DevOps and Azure IaC. Today, we'll focus on a crucial aspect of DevOps practices: centralised pipelines. These standardised workflows can significantly enhance your team's efficiency, consistency, and governance when managing infrastructure as code.
+Welcome back to our DevOps and Azure IaC series! In our previous article, we
+delved into the Deploy phase, exploring effective approaches for deploying
+infrastructure using DevOps and Azure IaC. Today, we'll focus on a crucial
+aspect of DevOps practices: centralised pipelines. These standardised workflows
+can significantly enhance your team's efficiency, consistency, and governance
+when managing infrastructure as code.
 
 ## What are Centralised Pipelines?
 
-Centralised pipelines are reusable CI/CD workflows that standardise your build, validation, and deployment processes across multiple projects or teams. Rather than having each team create their own unique pipelines, centralised pipelines establish a consistent approach that can be leveraged across your organisation. This is particularly valuable for infrastructure as code, where consistency and standardisation are essential for maintaining security and compliance.
+Centralised pipelines are reusable CI/CD workflows that standardise your build,
+validation, and deployment processes across multiple projects or teams. Rather
+than having each team create their own unique pipelines, centralised pipelines
+establish a consistent approach that can be leveraged across your organisation.
+This is particularly valuable for infrastructure as code, where consistency and
+standardisation are essential for maintaining security and compliance.
 
 Overview of centralised pipelines:
 
@@ -50,20 +60,30 @@ flowchart LR
 
 ## Benefits of Centralised Pipelines
 
-Centralised pipelines offer several key benefits for managing infrastructure as code:
+Centralised pipelines offer several key benefits for managing infrastructure as
+code:
 
-- **Consistency and Standardisation:** Centralised pipelines enforce uniform infrastructure deployment practices across all teams. This standardisation prevents inconsistencies and reduces the risk of human error in pipeline setup.
+- **Consistency and Standardisation:** Centralised pipelines enforce uniform
+  infrastructure deployment practices across all teams. This standardisation
+  prevents inconsistencies and reduces the risk of human error in pipeline
+  setup.
 
-- **Reduced Maintenance Overhead:** With centralised pipelines, you only need to update and maintain one set of workflows rather than updating numerous similar pipelines across projects. When security requirements change or new best practices emerge, you can implement these changes in one place.
+- **Reduced Maintenance Overhead:** With centralised pipelines, you only need to
+  update and maintain one set of workflows rather than updating numerous similar
+  pipelines across projects. When security requirements change or new best
+  practices emerge, you can implement these changes in one place.
 
-- **Built-in Governance:** Centralised pipelines allow you to embed governance controls directly into your deployment processes. These controls can include:
+- **Built-in Governance:** Centralised pipelines allow you to embed governance
+  controls directly into your deployment processes. These controls can include:
   - Mandatory security scans
   - Policy compliance checks
   - Approval workflows
   - Audit logging
   - Cost management validations
 
-- **Knowledge Sharing:** Centralised pipelines document your organisation's best practices in code, making it easier for new team members to understand deployment standards and quickly become productive.
+- **Knowledge Sharing:** Centralised pipelines document your organisation's best
+  practices in code, making it easier for new team members to understand
+  deployment standards and quickly become productive.
 
 Illustrating the benefits of centralised pipelines:
 
@@ -99,7 +119,9 @@ graph TD
 
 ## Implementing Centralised Pipelines in GitHub
 
-The example below demonstrates how to implement centralised pipelines using GitHub's reusable workflows feature. This approach allows you to define core workflows that can be called from individual repositories.
+The example below demonstrates how to implement centralised pipelines using
+GitHub's reusable workflows feature. This approach allows you to define core
+workflows that can be called from individual repositories.
 
 This has been illustrated in the following diagram:
 
@@ -136,7 +158,8 @@ Code snippets for implementing centralised pipelines in GitHub:
 
 ### Centralised Pipeline Reusable Workflow
 
-Here is an example of a centralised pipeline reusable workflow that deploys a Bicep template:
+Here is an example of a centralised pipeline reusable workflow that deploys a
+Bicep template:
 
 ```yaml
 {% raw %}
@@ -252,7 +275,8 @@ jobs:
 
 ### Calling Centralised Pipelines
 
-Individual repositories can then call these centralised pipelines, providing only the required parameters:
+Individual repositories can then call these centralised pipelines, providing
+only the required parameters:
 
 ```yaml
 {% raw %}
@@ -336,7 +360,9 @@ jobs:
 
 ## Implementing Centralised Pipelines in Azure DevOps
 
-The example below demonstrates how to implement centralised pipelines using Azure DevOps's pipeline template feature. This approach allows you to define core workflows that can be called from individual repositories.
+The example below demonstrates how to implement centralised pipelines using
+Azure DevOps's pipeline template feature. This approach allows you to define
+core workflows that can be called from individual repositories.
 
 This has been illustrated in the following diagram:
 
@@ -536,12 +562,16 @@ stages:
 
 ## Building a Central Pipeline Repository
 
-To effectively implement centralised pipelines, create a dedicated repository that contains:
+To effectively implement centralised pipelines, create a dedicated repository
+that contains:
 
-1. Central Pipelines: Core pipeline definitions for common tasks like build, validation, and deployment.
-2. Documentation: Clear guidelines explaining how to use the pipelines and their requirements.
+1. Central Pipelines: Core pipeline definitions for common tasks like build,
+   validation, and deployment.
+2. Documentation: Clear guidelines explaining how to use the pipelines and their
+   requirements.
 3. Templates: Sample implementation templates to help teams get started quickly.
-4. Validation Scripts: Common validation tools and scripts that enforce best practices.
+4. Validation Scripts: Common validation tools and scripts that enforce best
+   practices.
 
 ```mermaid
 graph LR
@@ -580,11 +610,16 @@ graph LR
 
 ## Pipeline Versioning Strategy
 
-When implementing centralised pipelines, it's important to establish a versioning strategy. This allows teams to adopt updates on their own schedule while ensuring stability. Consider these approaches:
+When implementing centralised pipelines, it's important to establish a
+versioning strategy. This allows teams to adopt updates on their own schedule
+while ensuring stability. Consider these approaches:
 
-1. Semantic Versioning: Tag your pipeline releases (v1.0.0, v1.1.0, etc.) and allow teams to reference specific versions.
-2. Branch-Based: Create stable branches (main, release, etc.) that teams can reference.
-3. Immutable Tags: Use immutable tags for major versions to prevent breaking changes.
+1. Semantic Versioning: Tag your pipeline releases (v1.0.0, v1.1.0, etc.) and
+   allow teams to reference specific versions.
+2. Branch-Based: Create stable branches (main, release, etc.) that teams can
+   reference.
+3. Immutable Tags: Use immutable tags for major versions to prevent breaking
+   changes.
 
 ```mermaid
 graph LR
@@ -621,10 +656,12 @@ graph LR
 
 ## Change Management
 
-Centralised pipelines require careful change management to avoid disrupting teams who depend on them:
+Centralised pipelines require careful change management to avoid disrupting
+teams who depend on them:
 
 1. Announce Changes: Communicate upcoming changes well in advance.
-2. Breaking vs. Non-Breaking: Clearly distinguish between breaking and non-breaking changes.
+2. Breaking vs. Non-Breaking: Clearly distinguish between breaking and
+   non-breaking changes.
 3. Testing: Thoroughly test changes before releasing them.
 4. Migration Guides: Provide documentation to help teams adopt new versions.
 
@@ -656,8 +693,16 @@ graph TD
 
 ## Conclusion
 
-Centralised pipelines are a powerful tool for standardising and scaling your infrastructure as code practices across teams. By implementing these shared workflows, we can enforce governance, reduce maintenance overhead, and accelerate onboarding while maintaining consistency in your deployments.
+Centralised pipelines are a powerful tool for standardising and scaling your
+infrastructure as code practices across teams. By implementing these shared
+workflows, we can enforce governance, reduce maintenance overhead, and
+accelerate onboarding while maintaining consistency in your deployments.
 
-In our next post, we'll explore how to integrate security scanning and other validation mechanisms into our centralised pipelines to further enhance our governance posture. Stay tuned!
+In our next post, we'll explore how to integrate security scanning and other
+validation mechanisms into our centralised pipelines to further enhance our
+governance posture. Stay tuned!
 
-For practical examples and implementation guidance, check out the [DevOps and Azure IaC repository](https://github.com/tw3lveparsecs/azure-iac-and-devops/blob/main/central-pipelines), which contains centralised pipelines in both GitHub reusable workflows and Azure DevOps templates for Azure IaC deployments.
+For practical examples and implementation guidance, check out the
+[DevOps and Azure IaC repository](https://github.com/tw3lveparsecs/azure-iac-and-devops/blob/main/central-pipelines),
+which contains centralised pipelines in both GitHub reusable workflows and Azure
+DevOps templates for Azure IaC deployments.

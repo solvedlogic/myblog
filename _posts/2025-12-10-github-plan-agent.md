@@ -1,29 +1,43 @@
 ---
 layout: post
-title: "From Awesome Copilot to Plan Agent: GitHub's Built-in Planning Revolution"
+title:
+  "From Awesome Copilot to Plan Agent: GitHub's Built-in Planning Revolution"
 date: 2025-12-10 06:00:00 +1100
 categories: [DevOps, AI]
 tags: [github, copilot, agent, devops, agentic, ai, plan]
 image: assets/images/posts/2025-12-10-github-plan-agent/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-In my [previous post about delivering major enhancements using agentic DevOps](https://azurewithaj.com/posts/agentic-devops-delivered-major-enhancement), I shared how I leveraged [GitHub's Awesome Copilot repository](https://github.com/github/awesome-copilot) to access proven prompts and agents for creating implementation plans. That approach served me well, but GitHub has now introduced something that changes the game entirely: the built-in **Plan agent**.
+In my
+[previous post about delivering major enhancements using agentic DevOps](https://azurewithaj.com/posts/agentic-devops-delivered-major-enhancement),
+I shared how I leveraged
+[GitHub's Awesome Copilot repository](https://github.com/github/awesome-copilot)
+to access proven prompts and agents for creating implementation plans. That
+approach served me well, but GitHub has now introduced something that changes
+the game entirely: the built-in **Plan agent**.
 
-This post explores how the new Plan agent compares to my previous Awesome Copilot workflow, what's changed in my approach, and whether this native integration delivers on its promise of streamlining complex coding tasks.
+This post explores how the new Plan agent compares to my previous Awesome
+Copilot workflow, what's changed in my approach, and whether this native
+integration delivers on its promise of streamlining complex coding tasks.
 
 ## The Evolution: From External Resources to Native Integration
 
 ### My Previous Approach with Awesome Copilot
 
-When I wrote about my agentic DevOps journey, my planning workflow relied on external resources:
+When I wrote about my agentic DevOps journey, my planning workflow relied on
+external resources:
 
-1. **Accessing the Awesome Copilot repository** for proven prompts and methodologies
-2. **Using the Create Implementation Plan prompt** to generate comprehensive technical plans
-3. **Applying the Implementation Plan agent (formerly chat mode)** to iteratively refine and expand the plan
-4. **Optionally using the MCP server** to integrate these resources into my workflow
+1. **Accessing the Awesome Copilot repository** for proven prompts and
+   methodologies
+2. **Using the Create Implementation Plan prompt** to generate comprehensive
+   technical plans
+3. **Applying the Implementation Plan agent (formerly chat mode)** to
+   iteratively refine and expand the plan
+4. **Optionally using the MCP server** to integrate these resources into my
+   workflow
 
 This approach worked exceptionally well, but it required:
 
@@ -34,7 +48,9 @@ This approach worked exceptionally well, but it required:
 
 ### The New Built-in Plan Agent
 
-With VS Code 1.105, GitHub introduced the Plan agent as a native feature. Instead of hunting for external prompts or configuring MCP servers, you can now access planning capabilities directly from the Chat view.
+With VS Code 1.105, GitHub introduced the Plan agent as a native feature.
+Instead of hunting for external prompts or configuring MCP servers, you can now
+access planning capabilities directly from the Chat view.
 
 ```mermaid
 graph LR
@@ -62,7 +78,10 @@ graph LR
 
 ## How the Plan Agent Works
 
-The Plan agent is designed to help you analyse tasks, break them down into steps, and generate implementation plans before you start development. This approach helps avoid missing important requirements, something I emphasised heavily in my previous workflow.
+The Plan agent is designed to help you analyse tasks, break them down into
+steps, and generate implementation plans before you start development. This
+approach helps avoid missing important requirements, something I emphasised
+heavily in my previous workflow.
 
 ### Getting Started with Plan Agent
 
@@ -75,12 +94,17 @@ To use the Plan agent:
 
 ### The Handoff Feature
 
-One of the most powerful features of the Plan agent is the **handoff** capability. After finalising your plan, you can:
+One of the most powerful features of the Plan agent is the **handoff**
+capability. After finalising your plan, you can:
 
-- **Start implementation immediately**: Transition directly to coding with context preserved
-- **Save the plan for later**: Store the plan for future reference or team collaboration
+- **Start implementation immediately**: Transition directly to coding with
+  context preserved
+- **Save the plan for later**: Store the plan for future reference or team
+  collaboration
 
-This handoff feature uses VS Code's new custom chat modes system, creating guided workflows that transition between planning and implementation phases with suggested next steps.
+This handoff feature uses VS Code's new custom chat modes system, creating
+guided workflows that transition between planning and implementation phases with
+suggested next steps.
 
 ![Plan agent handoff options](../assets/images/posts/2025-12-10-github-plan-agent/plan_agent_handoff.png)
 
@@ -110,19 +134,37 @@ The built-in Plan agent offers:
 
 ### The Good: Accessibility and Workflow
 
-The Plan agent's greatest strength is its **accessibility**. It's incredibly intuitive and requires virtually no learning curve. Within minutes of opening the Chat view, I was generating comprehensive plans without needing to reference external documentation or configure anything.
+The Plan agent's greatest strength is its **accessibility**. It's incredibly
+intuitive and requires virtually no learning curve. Within minutes of opening
+the Chat view, I was generating comprehensive plans without needing to reference
+external documentation or configure anything.
 
-The **iterative refinement process** feels natural. Unlike my previous workflow where I'd copy prompts from Awesome Copilot and paste them into chat, the Plan agent maintains conversation context seamlessly. I can ask for more detail on specific steps, request alternative approaches, or drill down into technical considerations without losing the thread of the discussion.
+The **iterative refinement process** feels natural. Unlike my previous workflow
+where I'd copy prompts from Awesome Copilot and paste them into chat, the Plan
+agent maintains conversation context seamlessly. I can ask for more detail on
+specific steps, request alternative approaches, or drill down into technical
+considerations without losing the thread of the discussion.
 
-Perhaps most impressive is the **handoff mechanism**. The ability to transition directly from planning to implementation or save the plan to a file while preserving all context eliminates friction.
+Perhaps most impressive is the **handoff mechanism**. The ability to transition
+directly from planning to implementation or save the plan to a file while
+preserving all context eliminates friction.
 
 ### The Trade-offs: Structure and Depth
 
-The Plan agent's output differs from what I was accustomed to with Awesome Copilot's structured templates:
+The Plan agent's output differs from what I was accustomed to with Awesome
+Copilot's structured templates:
 
-**Plan Structure**: The Awesome Copilot "Create Implementation Plan" prompt produced well-structured output with clearly articulated goals and tasks broken down hierarchically, making it suitable for backlog items, stakeholder communication, or sprint ceremonies. In contrast, the Plan agent breaks plans down into detailed bulleted steps focused on technical implementation. While this works well for development, it's less structured for project management purposes.
+**Plan Structure**: The Awesome Copilot "Create Implementation Plan" prompt
+produced well-structured output with clearly articulated goals and tasks broken
+down hierarchically, making it suitable for backlog items, stakeholder
+communication, or sprint ceremonies. In contrast, the Plan agent breaks plans
+down into detailed bulleted steps focused on technical implementation. While
+this works well for development, it's less structured for project management
+purposes.
 
-**Risk and Dependency Analysis**: I've noticed that **dependencies and risks aren't explicitly called out** in the plans. The Awesome Copilot templates had dedicated sections for:
+**Risk and Dependency Analysis**: I've noticed that **dependencies and risks
+aren't explicitly called out** in the plans. The Awesome Copilot templates had
+dedicated sections for:
 
 - Technical dependencies and integration points
 - Potential risks and mitigation strategies
@@ -131,7 +173,8 @@ The Plan agent's output differs from what I was accustomed to with Awesome Copil
 
 ## Integration with the Broader Agentic Workflow
 
-The Plan agent doesn't exist in isolation. It's part of a broader ecosystem that GitHub introduced at Universe 2025:
+The Plan agent doesn't exist in isolation. It's part of a broader ecosystem that
+GitHub introduced at Universe 2025:
 
 ```mermaid
 graph TD
@@ -164,15 +207,20 @@ graph TD
 
 ### Subagents for Research
 
-The new isolated subagents feature complements the Plan agent perfectly. You can use subagents for:
+The new isolated subagents feature complements the Plan agent perfectly. You can
+use subagents for:
 
-- **Context gathering**: Research authentication mechanisms, API patterns, or existing implementations
+- **Context gathering**: Research authentication mechanisms, API patterns, or
+  existing implementations
 - **Analysis**: Investigate codebase structure or dependency relationships
 - **Parallel research**: Delegate research tasks while you focus on planning
 
 ### Delegation to Coding Agent
 
-If your repository has the [Copilot coding agent enabled](https://aka.ms/coding-agent-docs), you can delegate directly from your planning session. This mirrors my previous workflow but with better context preservation:
+If your repository has the
+[Copilot coding agent enabled](https://aka.ms/coding-agent-docs), you can
+delegate directly from your planning session. This mirrors my previous workflow
+but with better context preservation:
 
 1. Plan with the Plan agent
 2. Refine and finalise the plan
@@ -181,11 +229,22 @@ If your repository has the [Copilot coding agent enabled](https://aka.ms/coding-
 
 ## Conclusion
 
-The introduction of the Plan agent signals GitHub's commitment to making agentic workflows more accessible. Rather than requiring developers to discover and configure external resources, core capabilities are being baked into the tools we use daily. The journey from Awesome Copilot prompts to the built-in Plan agent represents a significant step forward in making agentic DevOps accessible to all developers. While Awesome Copilot remains a valuable resource for customised workflows and team-specific templates, the Plan agent provides an excellent starting point that requires zero configuration.
+The introduction of the Plan agent signals GitHub's commitment to making agentic
+workflows more accessible. Rather than requiring developers to discover and
+configure external resources, core capabilities are being baked into the tools
+we use daily. The journey from Awesome Copilot prompts to the built-in Plan
+agent represents a significant step forward in making agentic DevOps accessible
+to all developers. While Awesome Copilot remains a valuable resource for
+customised workflows and team-specific templates, the Plan agent provides an
+excellent starting point that requires zero configuration.
 
-For my workflow, the Plan agent has become my default starting point for new features and enhancements. The seamless integration, handoff capabilities, and context preservation make it a natural fit for the agentic DevOps approach I outlined in my previous post.
+For my workflow, the Plan agent has become my default starting point for new
+features and enhancements. The seamless integration, handoff capabilities, and
+context preservation make it a natural fit for the agentic DevOps approach I
+outlined in my previous post.
 
-Have you tried the Plan agent in VS Code? I'd love to hear how it compares to your existing planning workflows. Share your experiences in the comments below.
+Have you tried the Plan agent in VS Code? I'd love to hear how it compares to
+your existing planning workflows. Share your experiences in the comments below.
 
 ## Further Reading
 

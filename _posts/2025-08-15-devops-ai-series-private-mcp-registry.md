@@ -1,32 +1,51 @@
 ---
 layout: post
-title: "DevOps and AI Series: Azure Private MCP Registry"
+title: 'DevOps and AI Series: Azure Private MCP Registry'
 date: 2025-08-15 05:00:00 +1100
 categories: [DevOps, AI]
 tags: [mcp, ai, devops, azure]
 image: assets/images/posts/2025-08-15-devops-ai-series-private-mcp-registry/feature_image.png
 mermaid: true
-author: AJ Bajada
+author: Sena
 toc: true
 ---
 
-The rapid adoption of AI-powered development tools has fundamentally changed how organisations approach software delivery. As teams increasingly rely on Model Context Protocol (MCP) servers to enhance their AI capabilities, the need for secure, governed, and centralised management of these resources has become critical. Today, we'll explore how to build an enterprise-ready private MCP registry using Azure API Center, ensuring your organisation can harness AI power while maintaining security and compliance standards.
+The rapid adoption of AI-powered development tools has fundamentally changed how
+organisations approach software delivery. As teams increasingly rely on Model
+Context Protocol (MCP) servers to enhance their AI capabilities, the need for
+secure, governed, and centralised management of these resources has become
+critical. Today, we'll explore how to build an enterprise-ready private MCP
+registry using Azure API Center, ensuring your organisation can harness AI power
+while maintaining security and compliance standards.
 
 ## The Enterprise AI Challenge: Beyond Public Repositories
 
-Organisations are discovering that while public MCP servers offer tremendous value, they also introduce significant governance challenges. Consider the reality facing most enterprises today:
+Organisations are discovering that while public MCP servers offer tremendous
+value, they also introduce significant governance challenges. Consider the
+reality facing most enterprises today:
 
-- **Security Concerns**: Public MCP servers may not meet enterprise security standards or compliance requirements
-- **Version Control**: Managing dependencies and updates across multiple teams becomes complex
-- **Performance**: External dependencies can introduce latency and availability concerns
-- **Intellectual Property**: Sensitive organisational knowledge requires controlled access
-- **Audit Requirements**: Compliance frameworks demand visibility into AI tooling usage
+- **Security Concerns**: Public MCP servers may not meet enterprise security
+  standards or compliance requirements
+- **Version Control**: Managing dependencies and updates across multiple teams
+  becomes complex
+- **Performance**: External dependencies can introduce latency and availability
+  concerns
+- **Intellectual Property**: Sensitive organisational knowledge requires
+  controlled access
+- **Audit Requirements**: Compliance frameworks demand visibility into AI
+  tooling usage
 
-Microsoft's approach with [Azure MCP Center](https://github.com/Azure/mcp-center) provides a compelling solution framework, demonstrating how Azure API Center can serve as the foundation for a private enterprise MCP registry.
+Microsoft's approach with
+[Azure MCP Center](https://github.com/Azure/mcp-center) provides a compelling
+solution framework, demonstrating how Azure API Center can serve as the
+foundation for a private enterprise MCP registry.
 
 ## Understanding the Azure MCP Architecture
 
-Azure API Center transforms from a traditional API management platform into a comprehensive MCP governance hub. This architectural shift enables organisations to treat MCP servers as first-class citizens within their enterprise software catalogue.
+Azure API Center transforms from a traditional API management platform into a
+comprehensive MCP governance hub. This architectural shift enables organisations
+to treat MCP servers as first-class citizens within their enterprise software
+catalogue.
 
 ```mermaid
 graph LR
@@ -110,13 +129,16 @@ graph LR
 
 ## Building Your Private MCP Registry: Implementation Guide
 
-By following this implementation guide, you can establish a private MCP registry tailored to your organisation's needs.
+By following this implementation guide, you can establish a private MCP registry
+tailored to your organisation's needs.
 
 ### Phase 1: Foundation Setup
 
-Start by establishing the core Azure API Center instance that will serve as your MCP registry foundation.
+Start by establishing the core Azure API Center instance that will serve as your
+MCP registry foundation.
 
-> **Note**: We're using Azure CLI for API Center creation since Azure Bicep doesn't currently provide native support for configuring SKU settings.
+> **Note**: We're using Azure CLI for API Center creation since Azure Bicep
+> doesn't currently provide native support for configuring SKU settings.
 
 ```powershell
 # Create resource group for MCP registry
@@ -138,23 +160,36 @@ az apic update `
 
 **Key Configuration Considerations:**
 
-- **Region Selection**: Choose regions that align with your data residency requirements
-- **SKU Planning**: Standard tier provides higher throughput and advanced features such as semantic search
-- **Naming Convention**: Establish consistent naming patterns for multiple environments
+- **Region Selection**: Choose regions that align with your data residency
+  requirements
+- **SKU Planning**: Standard tier provides higher throughput and advanced
+  features such as semantic search
+- **Naming Convention**: Establish consistent naming patterns for multiple
+  environments
 
 ### Phase 2: MCP Server Governance
 
-Transform your MCP server registrations into a well-governed enterprise system by setting clear rules for how they're documented using metadata.
+Transform your MCP server registrations into a well-governed enterprise system
+by setting clear rules for how they're documented using metadata.
 
-Instead of letting teams register MCP servers with inconsistent information, you create mandatory fields that everyone must complete. These include basic details like who owns the server, what stage of development it's in, and how sensitive the data it handles is.
+Instead of letting teams register MCP servers with inconsistent information, you
+create mandatory fields that everyone must complete. These include basic details
+like who owns the server, what stage of development it's in, and how sensitive
+the data it handles is.
 
-When someone tries to register a new MCP server, the system automatically checks that all required information is provided and follows your standards. If something is missing or incorrect, the registration is rejected. This means only properly documented, compliant MCP servers make it into your registry.
+When someone tries to register a new MCP server, the system automatically checks
+that all required information is provided and follows your standards. If
+something is missing or incorrect, the registration is rejected. This means only
+properly documented, compliant MCP servers make it into your registry.
 
-The result is a clean, consistent catalogue where you can easily find information about any MCP server, track ownership, manage lifecycles, and ensure security requirements are met across your entire organisation.
+The result is a clean, consistent catalogue where you can easily find
+information about any MCP server, track ownership, manage lifecycles, and ensure
+security requirements are met across your entire organisation.
 
 Let's implement this governance pattern step by step:
 
-1. Create required governance metadata definitions (in this scenario we are using schema files, you can use Azure CLI and PowerShell also):
+1. Create required governance metadata definitions (in this scenario we are
+   using schema files, you can use Azure CLI and PowerShell also):
 
 Save the following to `lifecycleStage.schema.json`:
 
@@ -220,23 +255,34 @@ az apic metadata create `
 
 Other additional metadata definitions you may want to consider:
 
-- **authMethod**: Authentication type (`none`, `apiKey`, `oauth2`, `aad`, `mTLS`)
-- **runtime**: Hosting environment (`aks`, `appService`, `functions`, `containerApps`, `vm`, `other`)
+- **authMethod**: Authentication type (`none`, `apiKey`, `oauth2`, `aad`,
+  `mTLS`)
+- **runtime**: Hosting environment (`aks`, `appService`, `functions`,
+  `containerApps`, `vm`, `other`)
 - **repository**: Source code repository URL
 - **contact**: Primary contact email address
-- **tags**: Categorisation tags (`compliance`, `healthcare`, `fintech`, `government`, `experimental`)
-- **criticality**: Business impact level (`low`, `medium`, `high`, `missionCritical`)
+- **tags**: Categorisation tags (`compliance`, `healthcare`, `fintech`,
+  `government`, `experimental`)
+- **criticality**: Business impact level (`low`, `medium`, `high`,
+  `missionCritical`)
 - **slaTier**: Service level agreement (`bronze`, `silver`, `gold`, `platinum`)
 
 ### Phase 3: MCP Server Registration
 
-Once the governance metadata is defined, you can register MCP servers into your private registry. This process will enforce the required metadata attributes, ensuring compliance with organisational standards.
+Once the governance metadata is defined, you can register MCP servers into your
+private registry. This process will enforce the required metadata attributes,
+ensuring compliance with organisational standards.
 
-Before we can register MCP servers, we need to configure an environment and a deployment for our MCP servers. The environment is the location of the MCP server, such as an API management platform or a compute service, and the deployment is a runtime URL for the MCP service.
+Before we can register MCP servers, we need to configure an environment and a
+deployment for our MCP servers. The environment is the location of the MCP
+server, such as an API management platform or a compute service, and the
+deployment is a runtime URL for the MCP service.
 
 We can then register our MCP servers into the private registry.
 
-Now that we have our governance framework in place, let's register MCP servers into our private registry. The following Azure Bicep template demonstrates how to systematically register MCP servers.
+Now that we have our governance framework in place, let's register MCP servers
+into our private registry. The following Azure Bicep template demonstrates how
+to systematically register MCP servers.
 
 ```bicep
 @description('API Center (APIC) service name to create (must be globally unique within constraints).')
@@ -373,22 +419,31 @@ output mcpApiId string = mcpApi.id
 output deploymentId string = deployment.id
 ```
 
-This template pattern can be replicated for any MCP server in your organisation, ensuring consistent governance and security standards across your entire AI tooling landscape.
+This template pattern can be replicated for any MCP server in your organisation,
+ensuring consistent governance and security standards across your entire AI
+tooling landscape.
 
 ### Phase 4: Enable API Center Portal
 
-With your MCP APIs registered, we now need to enable the API Center portal so internal users can discover and explore approved MCP servers.
+With your MCP APIs registered, we now need to enable the API Center portal so
+internal users can discover and explore approved MCP servers.
 
 There are two options:
 
-1. **Quick Setup**: Use the automated setup process to configure the API Center portal with minimal manual steps.
-2. **Manual Setup**: Create the required resources such as app registration and configure the API Center portal settings.
+1. **Quick Setup**: Use the automated setup process to configure the API Center
+   portal with minimal manual steps.
+2. **Manual Setup**: Create the required resources such as app registration and
+   configure the API Center portal settings.
 
-Details on the quick setup process can be found in the API Center documentation [here](https://learn.microsoft.com/en-us/azure/api-center/set-up-api-center-portal#set-up-the-app-registration-manually).
+Details on the quick setup process can be found in the API Center documentation
+[here](https://learn.microsoft.com/en-us/azure/api-center/set-up-api-center-portal#set-up-the-app-registration-manually).
 
-Outlined below are the steps for the manual setup backed with automation commands.
+Outlined below are the steps for the manual setup backed with automation
+commands.
 
-1. Create the App Registration in your Microsoft Entra ID tenant. (The app registration enables the API Center portal to access data from your API center on behalf of a signed-in user.)
+1. Create the App Registration in your Microsoft Entra ID tenant. (The app
+   registration enables the API Center portal to access data from your API
+   center on behalf of a signed-in user.)
 
 ```powershell
 $serviceName = "<your-service-name>"
@@ -421,48 +476,63 @@ az rest --method PATCH `
 
 2. Configure and publish the API Center Portal
 
-Currently there is no command lines available to automate the configuration and publishing of the API Center Portal. This process must be completed manually through the Azure portal.
+Currently there is no command lines available to automate the configuration and
+publishing of the API Center Portal. This process must be completed manually
+through the Azure portal.
 
 - Open the Azure portal and navigate to the API Center resource.
 - Select the Identity provider tab, select Start set up.
-- On the Manual tab, in Client ID, enter the Application (client) ID from the app registration you created in the previous section (the value of variable $appId).
-- Confirm that the Redirect URI is the value you configured in the app registration.
+- On the Manual tab, in Client ID, enter the Application (client) ID from the
+  app registration you created in the previous section (the value of variable
+  $appId).
+- Confirm that the Redirect URI is the value you configured in the app
+  registration.
 - Select Save + publish.
 
 ![API Center Publish Portal](../assets/images//posts/2025-08-15-devops-ai-series-private-mcp-registry/private_mcp_registry_enable_apic_portal.png)
 
-To enable sign-in to the API Center portal to access APIs, assign the **Azure API Center Data Reader** role to users or groups in your organisation, scoped to your API center.
+To enable sign-in to the API Center portal to access APIs, assign the **Azure
+API Center Data Reader** role to users or groups in your organisation, scoped to
+your API center.
 
-You will then end up with a secure and governed API Center portal that allows your internal users to discover and explore approved MCP servers, example below.
+You will then end up with a secure and governed API Center portal that allows
+your internal users to discover and explore approved MCP servers, example below.
 
 ![API Center Portal](../assets/images//posts/2025-08-15-devops-ai-series-private-mcp-registry/private_mcp_registry_apic_portal.png)
 
 ## Real-World Problems and Private Registry Solutions
 
-Organisations adopting AI-powered development tools face several critical challenges that a private MCP registry directly addresses. Let's examine the most common scenarios and how this architecture provides practical solutions.
+Organisations adopting AI-powered development tools face several critical
+challenges that a private MCP registry directly addresses. Let's examine the
+most common scenarios and how this architecture provides practical solutions.
 
 ### Challenge 1: Shadow IT and Uncontrolled AI Tool Adoption
 
-**The Problem:**
-Development teams are rapidly adopting AI tools and MCP servers without central oversight. This creates security blind spots, compliance risks, and operational fragmentation across the organisation.
+**The Problem:** Development teams are rapidly adopting AI tools and MCP servers
+without central oversight. This creates security blind spots, compliance risks,
+and operational fragmentation across the organisation.
 
 **Private Registry Solution:**
 
 - **Centralised Discovery**: Provide a curated catalogue of approved MCP servers
-- **Self-Service Access**: Enable teams to find and consume AI tools through governed channels
+- **Self-Service Access**: Enable teams to find and consume AI tools through
+  governed channels
 - **Usage Visibility**: Monitor what tools are being used and by whom
 
 ### Challenge 2: Regulatory Compliance and Data Sovereignty
 
-**The Problem:**
-Organisations in regulated industries (financial services, healthcare, government) need to maintain strict control over data flows and ensure AI tools meet compliance requirements.
+**The Problem:** Organisations in regulated industries (financial services,
+healthcare, government) need to maintain strict control over data flows and
+ensure AI tools meet compliance requirements.
 
 **Private Registry Solution:**
 
-- **Data Classification**: Tag MCP servers with appropriate data handling classifications
+- **Data Classification**: Tag MCP servers with appropriate data handling
+  classifications
 - **Geographic Controls**: Implement region-specific MCP server availability
 - **Audit Trails**: Comprehensive logging of all AI tool interactions
-- **Compliance Templates**: Pre-configured MCP servers that meet regulatory standards
+- **Compliance Templates**: Pre-configured MCP servers that meet regulatory
+  standards
 
 ```mermaid
 graph LR
@@ -498,30 +568,38 @@ graph LR
 
 ### Challenge 3: Cost Control and Resource Optimisation
 
-**The Problem:**
-Uncontrolled AI tool usage can lead to unexpected costs, especially with cloud-based MCP servers that charge per API call or usage volume.
+**The Problem:** Uncontrolled AI tool usage can lead to unexpected costs,
+especially with cloud-based MCP servers that charge per API call or usage
+volume.
 
 **Private Registry Solution:**
 
 - **Usage Monitoring**: Real-time tracking of MCP server consumption and costs
-- **Budget Controls**: Ability to implement budget alerts for visibility into spending
-- **Resource Optimisation**: Identification of underutilised or redundant MCP servers
+- **Budget Controls**: Ability to implement budget alerts for visibility into
+  spending
+- **Resource Optimisation**: Identification of underutilised or redundant MCP
+  servers
 - **Chargeback Models**: Enablement of cost allocation to business units
 
 ### Challenge 4: Developer Productivity and Tool Discovery
 
-**The Problem:**
-Developers waste time recreating functionality that already exists in other MCP servers, or struggle to find the right AI tools for their specific needs.
+**The Problem:** Developers waste time recreating functionality that already
+exists in other MCP servers, or struggle to find the right AI tools for their
+specific needs.
 
 **Private Registry Solution:**
 
-- **Intelligent Search**: Semantic search across MCP server capabilities and documentation
-- **Recommendation Engine**: Suggest relevant MCP servers based on project context
-- **Community Ratings**: Internal feedback and rating system for MCP server quality
+- **Intelligent Search**: Semantic search across MCP server capabilities and
+  documentation
+- **Recommendation Engine**: Suggest relevant MCP servers based on project
+  context
+- **Community Ratings**: Internal feedback and rating system for MCP server
+  quality
 
 ## Measuring Success: Key Performance Indicators
 
-Organisations implementing private MCP registries should track these metrics to validate the investment:
+Organisations implementing private MCP registries should track these metrics to
+validate the investment:
 
 **Security Metrics:**
 
@@ -542,15 +620,21 @@ Organisations implementing private MCP registries should track these metrics to 
 
 ## Conclusion
 
-Building an enterprise-ready private MCP registry using Azure API Center transforms how organisations approach AI governance and security. By implementing the patterns and practices outlined in this post, you can:
+Building an enterprise-ready private MCP registry using Azure API Center
+transforms how organisations approach AI governance and security. By
+implementing the patterns and practices outlined in this post, you can:
 
 - **Enhance Security**: Comprehensive control over AI tooling access and usage
 - **Improve Compliance**: Automated governance and audit capabilities
-- **Accelerate Innovation**: Self-service AI capabilities with built-in guardrails
+- **Accelerate Innovation**: Self-service AI capabilities with built-in
+  guardrails
 - **Optimise Costs**: Centralised management and usage analytics
 
-The investment in a private MCP registry pays dividends not just in security and compliance, but in enabling your organisation to confidently embrace AI-powered development at scale.
+The investment in a private MCP registry pays dividends not just in security and
+compliance, but in enabling your organisation to confidently embrace AI-powered
+development at scale.
 
 ---
 
-Ready to bring your private MCP registry to life? [Click here to view an end-to-end DevOps example that registers the GitHub Remote MCP server](https://github.com/tw3lveparsecs/devops-and-ai/tree/main/register-mcp-servers).
+Ready to bring your private MCP registry to life?
+[Click here to view an end-to-end DevOps example that registers the GitHub Remote MCP server](https://github.com/tw3lveparsecs/devops-and-ai/tree/main/register-mcp-servers).
