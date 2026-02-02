@@ -1,18 +1,18 @@
 # Site
-name: "Azure with AJ"
-title: "Azure with AJ"
+name: "Mastermind"
+title: "Mastermind"
 description: "A blog by an Azure, DevOps and AI enthusiast, sharing valuable insights and expertise."
 logo: "assets/images/about/profile.png"
 favicon: "assets/images/favicons/favicon.ico"
-url: "https://azurewithaj.com"
-canonical_url: "https://azurewithaj.com"
-baseurl: ""
+url: "https://solvedlogic.github.io"
+canonical_url: "https://solvedlogic.github.io"
+baseurl: "/myblog"
 google_analytics: "G-QN1JHQ7WLQ"
 
 # Giscus comments (https://giscus.app)
 # Fill these values from the giscus.app setup page.
 giscus:
-  repo: "tw3lveparsecs/tw3lveparsecs.github.io" # e.g. "tw3lveparsecs/tw3lveparsecs.github.io"
+  repo: "solvedlogic/myblog" # e.g. "tw3lveparsecs/tw3lveparsecs.github.io"
   repo_id: ""
   category: "Announcements"
   category_id: ""
@@ -29,15 +29,15 @@ permalink: /:title/
 
 # Social links (used in header)
 social:
-  github: "https://github.com/tw3lveparsecs"
+  github: "https://github.com/solvedlogic"
   linkedin: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
   email: "aj.bajada@outlook.com"
 
 # Authors
 authors:
-  AJ Bajada:
-    name: AJ Bajada
-    display_name: AJ Bajada
+  Sena:
+    name: Sena
+    display_name: Sena
     avatar: "assets/images/about/profile.png"
     follow_url: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
     # follow_label: "Follow"
