@@ -13,16 +13,16 @@ google_analytics: "G-QN1JHQ7WLQ"
 # Fill these values from the giscus.app setup page.
 giscus:
   repo: "solvedlogic/myblog" # e.g. "tw3lveparsecs/tw3lveparsecs.github.io"
-  repo_id: ""
-  category: "Announcements"
-  category_id: ""
+  repo_id: "R_kgDORG3Y5Q"
+  category: "General"
+  category_id: "DIC_kwDORG3Y5c4C18R_"
   mapping: "title" # pathname | url | title | og:title | specific
-  strict: 1
+  strict: 0
   reactions_enabled: 1
   emit_metadata: 0
   input_position: "bottom" # bottom | top
   theme: "preferred_color_scheme"
-  lang: "en"
+  lang: "id"
   loading: "lazy"
 include: ["_pages"]
 permalink: /:title/
