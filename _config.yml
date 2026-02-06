@@ -32,13 +32,14 @@ social:
   github: "https://github.com/solvedlogic"
   linkedin: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
   email: "aj.bajada@outlook.com"
+  instagram : "https://www.instagram.com/rikowibisana/?__pwa=1"
 
 # Authors
 authors:
   Sena:
     name: Sena
     display_name: Sena
-    avatar: "assets/images/about/profile.png"
+    avatar: "assets/images/about/sho.jpeg"
     follow_url: "https://www.linkedin.com/in/aj-bajada-3347a52a/"
     # follow_label: "Follow"
     description: "Author of 'Azure with AJ', sharing insights on Azure, DevOps, and AI."

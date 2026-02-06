@@ -1,5 +1,5 @@
-{%- assign social = site.social -%} {%- if social and (social.github or
-social.email or social.linkedin) -%}
+{%- assign social = site.social -%}
+{%- if social and (social.github or social.email or social.linkedin or social.instagram) -%}
 <ul class="social-links" aria-label="Social links">
   {%- if social.github -%}
   <li>
@@ -12,7 +12,22 @@ social.email or social.linkedin) -%}
       <i class="fab fa-github" aria-hidden="true"></i>
     </a>
   </li>
-  {%- endif -%} {%- if social.linkedin -%}
+  {%- endif -%}
+
+  {%- if social.instagram -%}
+  <li>
+    <a
+      href="{{ social.instagram }}"
+      target="_blank"
+      rel="noopener noreferrer me"
+      aria-label="Instagram"
+    >
+      <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+  </li>
+  {%- endif -%}
+
+  {%- if social.linkedin -%}
   <li>
     <a
       href="{{ social.linkedin }}"
@@ -23,7 +38,9 @@ social.email or social.linkedin) -%}
       <i class="fab fa-linkedin-in" aria-hidden="true"></i>
     </a>
   </li>
-  {%- endif -%} {%- if social.email -%}
+  {%- endif -%}
+
+  {%- if social.email -%}
   <li>
     <a href="mailto:{{ social.email }}" aria-label="Email">
       <i class="fas fa-envelope" aria-hidden="true"></i>
