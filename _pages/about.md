@@ -21,7 +21,7 @@ comments: false
 <div class="sticky-top sticky-top-80">
 
 <img
-	src="{{ site.baseurl }}/assets/images/about/profile.png"
+	src="{{ site.baseurl }}/assets/images/about/sho.jpeg"
 	alt="{{ site.name }}"
 	class="img-fluid"
 	style="max-width: 260px; width: 100%; border-radius: 8px;"
